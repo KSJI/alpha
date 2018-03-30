@@ -1,5 +1,3 @@
-# alpha
-
 # Mission Statement
 
 Enforce healthier lifestyles by encouraging healthy eating.
