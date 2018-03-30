@@ -8,7 +8,7 @@ Our goal is to make a social impact by transforming our current society where fa
 
 
 Roles:
-Ju An Oh (juan3674-1532739) - Developer
-Soobin Kwon (soobkwan) - Design
-Kyle Simpson (kyle-simpson) - Marketing
-Ivan Mireles (mirelesi) - Project Management
+* Ju An Oh (juan3674-1532739) - Developer
+* Soobin Kwon (soobkwan) - Design
+* Kyle Simpson (kyle-simpson) - Marketing
+* Ivan Mireles (mirelesi) - Project Management
