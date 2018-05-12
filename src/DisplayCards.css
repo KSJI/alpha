@@ -1,0 +1,17 @@
+.wrapper {
+    width:70%;
+    margin-left:15%;
+}
+.cards-col {
+    float:left;
+    width:85%;
+}
+
+.settings-col {
+    width:14%;
+    float:right;
+    background-color: white;
+    border:1px solid black;
+    margin-bottom:2%;
+}
+
