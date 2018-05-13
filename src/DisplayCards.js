@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { MakeCard } from './MakeCard';
-import {Col} from 'reactstrap';
+import { HashRouter as Router, Link } from '../node_modules/react-router-dom';
+import { Col } from 'reactstrap';
 import './DisplayCards.css';
 
 export class DisplayCards extends Component {
@@ -38,10 +39,12 @@ export class DisplayCards extends Component {
                 <Col className="cards-col">
                     {cards}
                 </Col>
-                <Col className="settings-col">
-                    <i className="fas fa-cog fa-lg"></i>{" "}
-                    <button type="button" className="btn btn-primary">SIGN OUT</button>
-                </Col>
+                <Router>
+                    <Col className="settings-col">
+                        <Link to="/Settings" style={{color:'black'}}><i className="fas fa-cog fa-lg"></i></Link>{" "}
+                        <button type="button" className="btn btn-primary">SIGN OUT</button>
+                    </Col>
+                </Router>
                 <Col className="settings-col">
                     <button>ADD A POST</button>
                 </Col>
