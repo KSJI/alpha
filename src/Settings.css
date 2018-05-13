@@ -17,6 +17,10 @@
     width:25%;
 }
 
+input {
+  text-align: center;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
