@@ -17,13 +17,8 @@ export class DisplayEditAccountSettings extends Component {
                     </div>
                     <div className="weight">
                         <p className="text">Weight</p> <input type="text"></input> lbs
-                </div>
-                    <div className="notifications">
-                        <p className="text">Notifications</p> <label className="switch">
-                            <input type="checkbox"></input>
-                            <span className="slider round"></span>
-                        </label> Email me reminders
-                </div>
+                    </div>
+
                     <div className="save">
                         <button>SAVE</button>
                     </div>
