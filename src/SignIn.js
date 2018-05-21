@@ -62,7 +62,7 @@ export default class SignInView extends React.Component {
                         <div className="form-group">
                             <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">Sign In</button>
                         </div>
-                        <p>Don't have an account yet? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>
+                        <p>New to KSI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>
                     </div>
                 </main>
             </div>

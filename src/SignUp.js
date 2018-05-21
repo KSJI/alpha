@@ -3,17 +3,43 @@ import {Link} from "react-router-dom";
 import {ROUTES} from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
-import md5 from "blueimp-md5";
 
 export default class SignUpView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            fullName: "",
             email: "",  
             password: "",
-            displayName: "",
-            confirmPass: "" ,
-            photoURL: ""
+            userName: "",
+            confirmPass: "",
+            weight: "",
+            authorSnap: undefined
+        }
+    }
+
+
+    componentWillMount() {
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                let user = firebase.auth().currentUser;
+                this.setState({currentUser: user});
+                this.setState({displayName: user.displayName});
+                this.setState({useruid: user.uid});
+                let ref  = firebase.database().ref(`Profile`);
+                this.valueListener = ref.on("value", 
+                snapshot => this.setState({authorSnap: snapshot}));
+            } else {
+                this.props.history.push(ROUTES.signIn);
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.authUnlisten();
+        if (this.state.messageSnap) {
+            let ref = this.state.authorSnap.ref;
+            ref.off("value", this.valueListener);
         }
     }
 
@@ -21,18 +47,34 @@ export default class SignUpView extends React.Component {
         if (this.state.email == null || this.state.password !== this.state.confirmPass) {
             return;
         } else {
-            let hash = md5(this.state.email);
+            this.handleAdd();
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password)
                 .then(user => user.updateProfile({
-                    photoURL: 'https://www.gravatar.com/avatar/' + hash,
                     useruid: user.uid,
                     displayName: this.state.displayName
                 }))
                 .then(() => this.props.history.push(ROUTES.signIn))
                 .catch(err => this.setState({fberror: err}))
+
         }
     }
+
+    handleAdd() {
+        let ref = this.state.authorSnap.ref; 
+        let time = firebase.database.ServerValue.TIMESTAMP;
+        time = Date(time);
+        let newData = {
+            Author: {
+                Username: this.state.userName,
+                Email: this.state.email,
+                Weight: this.state.weight
+            },
+            createdAt: time,
+        }
+        ref.push(newData);
+    }
+
     render() {
         return (
             <div>
@@ -42,9 +84,17 @@ export default class SignUpView extends React.Component {
                     </div>
                 </header>
                 <main>
+                    <div className="form-group">
+                        <label htmlFor='Full-name'>Full Name</label>
+                            <input type='text'
+                                className='form-control'
+                                required
+                                placeholder='Your Full Name'
+                                onInput={evt => this.setState({fullName: evt.target.value})}/>
+                    </div>
                     <div className="container">
                         <div className="form-group">
-                            <label htmlFor="email">Email Address</label>
+                            <label htmlFor="email">Email</label>
                                 <input type="text"
                                     id="email"
                                     className="form-control"
@@ -52,13 +102,25 @@ export default class SignUpView extends React.Component {
                                     required
                                     onInput={evt => this.setState({email: evt.target.value})}/>
                         </div>
+                    </div>
                     <div className="form-group">
-                        <label htmlFor='display-name'>Display Name</label>
-                            <input type='text'
+                        <label htmlFor='Weight'>Weight</label>
+                            <input type='number'
                                 className='form-control'
                                 required
-                                placeholder='Your display Name'
-                                onInput={evt => this.setState({displayName: evt.target.value})}/>
+                                step='.01'
+                                placeholder=''
+                                onInput={evt => this.setState({weight: evt.target.value})}/>
+                        <p> lb </p>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor='Username'>Username</label>
+                            <input type='number'
+                                className='form-control'
+                                required
+                                step=".01"
+                                placeholder='Your Username'
+                                onInput={evt => this.setState({userName: evt.target.value})}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
@@ -83,7 +145,6 @@ export default class SignUpView extends React.Component {
                     </div>                      
                         <p>Already have an account? <Link to={ROUTES.signIn}>
                          Sign In! </Link> </p>
-                    </div>
                 </main>
             </div>
         );
