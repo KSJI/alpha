@@ -115,10 +115,9 @@ export default class SignUpView extends React.Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor='Username'>Username</label>
-                            <input type='number'
+                            <input type='text'
                                 className='form-control'
                                 required
-                                step=".01"
                                 placeholder='Your Username'
                                 onInput={evt => this.setState({userName: evt.target.value})}/>
                     </div>
