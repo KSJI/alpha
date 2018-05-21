@@ -9,4 +9,9 @@ export class DisplayHeader extends Component {
             </div>
         )
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> kyle
