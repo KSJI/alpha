@@ -4,7 +4,7 @@ import {ROUTES} from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
 
-export default class SignUpView extends React.Component {
+export default class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +30,9 @@ export default class SignUpView extends React.Component {
                 this.valueListener = ref.on("value", 
                 snapshot => this.setState({authorSnap: snapshot}));
             } else {
-                this.props.history.push(ROUTES.signIn);
+                let ref  = firebase.database().ref(`Profile`);
+                this.valueListener = ref.on("value", 
+                snapshot => this.setState({authorSnap: snapshot}));
             }
         });
     }
@@ -54,7 +56,7 @@ export default class SignUpView extends React.Component {
                     useruid: user.uid,
                     displayName: this.state.displayName
                 }))
-                .then(() => this.props.history.push(ROUTES.signIn))
+                .then(() => this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
 
         }
