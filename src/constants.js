@@ -1,5 +1,6 @@
 export const ROUTES = {
     signIn: "/signin",
     signUp: "/signup",
-    homePage: "/homepage"
+    homePage: "/homepage",
+    displayEditAccountSettings: "/settings"
 }

@@ -15,8 +15,6 @@ export class DisplayCards extends Component {
     }
 
     componentWillMount() {
-        let user =  firebase.auth().currentUser;
-console.log(user);
         this.reference = firebase.database().ref("posts");
         this.reference.on('value', (snapshot) => {
             let ref = snapshot.val();

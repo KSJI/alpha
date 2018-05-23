@@ -3,6 +3,7 @@ import{HashRouter as Router, Switch, Redirect, Route} from 'react-router-dom';
 import {ROUTES} from './constants';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import DisplayEditAccountSettings from "./Settings";
 import './App.css';
 import { Homepage } from './Homepage';
 
@@ -15,6 +16,7 @@ class App extends Component {
                     <Route exact path={ROUTES.signIn} component={SignIn} />
                     <Route path={ROUTES.signUp} component={SignUp} />
                     <Route path={ROUTES.homePage} component={Homepage} />
+                    <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>

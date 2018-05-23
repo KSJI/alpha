@@ -56,14 +56,14 @@ export default class SignUp extends React.Component {
                     useruid: user.uid,
                     displayName: this.state.displayName
                 }))
-                .then(() => this.props.history.push(ROUTES.homePage))
+                .then(this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
-
         }
     }
 
     handleAdd() {
         let ref = this.state.authorSnap.ref; 
+        console.log(ref);
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
         let newData = {
