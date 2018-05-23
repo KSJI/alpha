@@ -11,7 +11,7 @@ export class Homepage extends Component {
         return (
             <div>
                 <DisplayHeader />
-                <DisplayEditAccountSettings /> {/*Change back to DisplayCards*/}
+                <DisplayCards history={this.props.history}/> {/*Change back to DisplayCards*/}
             </div >
         )
     }

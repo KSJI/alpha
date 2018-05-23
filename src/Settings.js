@@ -16,11 +16,11 @@ export class DisplayEditAccountSettings extends Component {
     componentDidMount() {
         let user =  firebase.auth().currentUser;
         console.log(user);
-        this.setState({
-            email: "email", //user.email
-            password:"the", //user.password
-            weight:123 //user.weight
-        })
+        // this.setState({
+        //     email: user.email,
+        //     password:user.password,
+        //     weight:user.weight
+        // })
     }
 
     render() {
