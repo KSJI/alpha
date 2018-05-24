@@ -4,7 +4,7 @@ import {ROUTES} from "./constants";
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-export default class SignInView extends React.Component {
+export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +23,7 @@ export default class SignInView extends React.Component {
     }
 
     componentWillUnmount() {
+        
         this.authUnlisten();
     }
 

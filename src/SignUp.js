@@ -4,7 +4,7 @@ import {ROUTES} from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
 
-export default class SignUpView extends React.Component {
+export default class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,6 @@ export default class SignUpView extends React.Component {
             email: "",  
             password: "",
             userName: "",
-            confirmPass: "",
             weight: "",
             authorSnap: undefined
         }
@@ -30,7 +29,9 @@ export default class SignUpView extends React.Component {
                 this.valueListener = ref.on("value", 
                 snapshot => this.setState({authorSnap: snapshot}));
             } else {
-                this.props.history.push(ROUTES.signIn);
+                let ref  = firebase.database().ref(`Profile`);
+                this.valueListener = ref.on("value", 
+                snapshot => this.setState({authorSnap: snapshot}));
             }
         });
     }
@@ -129,15 +130,6 @@ export default class SignUpView extends React.Component {
                                 placeholder="your password"
                                 minLength="6"
                                 onInput={evt => this.setState({password: evt.target.value})}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="confirm password">Confirm Password</label>
-                            <input type="password"
-                                id=" confirm password"
-                                className="form-control"
-                                placeholder="confirm your password"
-                                minLength="6"
-                                onInput={evt => this.setState({confirmPass: evt.target.value})}/>
                     </div>
                     <div className="form-group">
                         <button type="submit" onClick={() => this.handleSignUp()} className="btn btn-primary">Sign Up</button>
