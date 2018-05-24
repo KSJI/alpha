@@ -15,12 +15,23 @@ export class DisplayCards extends Component {
     }
 
     componentWillMount() {
-        this.reference = firebase.database().ref("posts");
-        this.reference.on('value', (snapshot) => {
-            let ref = snapshot.val();
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             this.setState({
-                cards: ref
-            });
+                email:user.email,
+                password:user.password,
+                weight:user.weight
+            })
+
+            let email = user.email;
+            let subEmail= email.substr(0, email.indexOf('@')); 
+
+            this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts');
+            this.reference.on('value', (snapshot) => {
+                let snap = snapshot.val();
+                this.setState({
+                    cards: snap,
+                });
+            })
         })
     }
 

@@ -12,8 +12,8 @@ export default class SignUp extends React.Component {
             email: "",  
             password: "",
             userName: "",
-            confirmPass: "",
             weight: "",
+            useruid: "",
             authorSnap: undefined
         }
     }
@@ -46,24 +46,25 @@ export default class SignUp extends React.Component {
     }
 
     handleSignUp() {
-        if (this.state.email == null || this.state.password !== this.state.confirmPass) {
+        if (this.state.email == null || this.state.password == null) {
             return;
         } else {
-            this.handleAdd();
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password)
                 .then(user => user.updateProfile({
                     useruid: user.uid,
-                    displayName: this.state.displayName
+                    displayName: this.state.displayName,
                 }))
+                .then(this.handleAdd())
                 .then(this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
         }
     }
 
     handleAdd() {
+        let email = this.state.email;
+        var subEmail= email.substr(0, email.indexOf('@')); 
         let ref = this.state.authorSnap.ref; 
-        console.log(ref);
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
         let newData = {
@@ -74,7 +75,7 @@ export default class SignUp extends React.Component {
             },
             createdAt: time,
         }
-        ref.push(newData);
+        ref.child(subEmail).set(newData);
     }
 
     render() {
@@ -133,15 +134,6 @@ export default class SignUp extends React.Component {
                                 onInput={evt => this.setState({password: evt.target.value})}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="confirm password">Confirm Password</label>
-                            <input type="password"
-                                id=" confirm password"
-                                className="form-control"
-                                placeholder="confirm your password"
-                                minLength="6"
-                                onInput={evt => this.setState({confirmPass: evt.target.value})}/>
-                    </div>
-                    <div className="form-group">
                         <button type="submit" onClick={() => this.handleSignUp()} className="btn btn-primary">Sign Up</button>
                     </div>                      
                         <p>Already have an account? <Link to={ROUTES.signIn}>
@@ -151,5 +143,3 @@ export default class SignUp extends React.Component {
         );
     }
 }
-
-

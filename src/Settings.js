@@ -15,17 +15,24 @@ export default class DisplayEditAccountSettings extends Component {
     }
 
     componentWillMount() {
-        let user =  firebase.auth().currentUser; 
-        console.log(user);
-        this.setState({
-            email: user.email,
-            password:user.password,
-            weight:user.weight
-        })
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            this.setState({
+                email:user.email,
+                password:user.password,
+                weight:user.weight
+            })
 
-        // edit this
-        let settingsRef = firebase.database().ref(user.uid + '/Author');
-        console.log(settingsRef);
+            let email = user.email;
+            let subEmail= email.substr(0, email.indexOf('@')); 
+
+            this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/Weight');
+            this.reference.on('value', (snapshot) => {
+                let snap = snapshot.val();
+                this.setState({
+                    weight: snap,
+                });
+            })
+        })
     }
 
     render() {
