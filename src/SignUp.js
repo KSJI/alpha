@@ -14,6 +14,7 @@ export default class SignUp extends React.Component {
             userName: "",
             confirmPass: "",
             weight: "",
+            useruid: "",
             authorSnap: undefined
         }
     }
@@ -54,7 +55,7 @@ export default class SignUp extends React.Component {
             this.state.password)
                 .then(user => user.updateProfile({
                     useruid: user.uid,
-                    displayName: this.state.displayName
+                    displayName: this.state.displayName,
                 }))
                 .then(() => this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
@@ -63,6 +64,8 @@ export default class SignUp extends React.Component {
     }
 
     handleAdd() {
+        let user = firebase.auth().currentUser;
+        this.setState({useruid: user.uid});
         let ref = this.state.authorSnap.ref; 
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
@@ -74,7 +77,7 @@ export default class SignUp extends React.Component {
             },
             createdAt: time,
         }
-        ref.push(newData);
+        ref.child(this.state.useruid).setValue(newData);
     }
 
     render() {

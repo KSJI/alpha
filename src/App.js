@@ -14,13 +14,11 @@ class App extends Component {
                 <Switch>
                     <Route exact path={ROUTES.signIn} component={SignIn} />
                     <Route path={ROUTES.signUp} component={SignUp} />
-                    <Route path={ROUTES.homePage} component={Homepage} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>
         );
     }
-  
 }
 
 export default App;
