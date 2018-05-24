@@ -4,6 +4,7 @@ import {ROUTES} from './constants';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import './App.css';
+import { Homepage } from './Homepage';
 
 
 class App extends Component {

@@ -23,7 +23,6 @@ export default class SignIn extends React.Component {
     }
 
     componentWillUnmount() {
-        
         this.authUnlisten();
     }
 
