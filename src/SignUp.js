@@ -49,13 +49,13 @@ export default class SignUp extends React.Component {
         if (this.state.email == null || this.state.password !== this.state.confirmPass) {
             return;
         } else {
-            this.handleAdd();
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
             this.state.password)
                 .then(user => user.updateProfile({
                     useruid: user.uid,
                     displayName: this.state.displayName,
                 }))
+                .then(() => this.handleAdd())
                 .then(() => this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
 
