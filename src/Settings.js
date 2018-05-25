@@ -9,6 +9,7 @@ export default class DisplayEditAccountSettings extends Component {
         super(props);
         this.state = {
             email: '',
+            username: '',
             weight: 0,
             newEmail: '',
             newPassword: '',
@@ -22,7 +23,8 @@ export default class DisplayEditAccountSettings extends Component {
                 this.setState({
                     email: user.email,
                     password: user.password,
-                    weight: user.weight
+                    weight: user.weight,
+                    username: user.username
                 })
 
                 let email = user.email;
@@ -36,13 +38,49 @@ export default class DisplayEditAccountSettings extends Component {
                     });
                 })
             }
-
         })
     }
 
     updateSettings() {
         if (this.state.newEmail !== '') {
+            let user = firebase.auth().currentUser;
+            // Get the current email node, (erase it?)
+            // Concatenate the new email address
+            // Add a new entry into the authentication
+            // Add the new node in the database
 
+            // user.reauthenticateAndRetrieveDataWithCredential(credential).then(function () {
+            //     // User re-authenticated.
+            // }).catch(function (error) {
+            //     // An error happened.
+            // });
+
+            user.updateEmail(this.state.newEmail).then(
+                console.log('success')
+            )
+
+
+
+
+            // let user = firebase.auth().currentUser;
+            // let ref = firebase.database().ref(`Profile`);
+            // this.valueListener = ref.on("value",
+            //     snapshot => this.setState({ authorSnap: snapshot }));
+
+            // let email = this.state.newEmail;
+            // var subEmail = email.substr(0, email.indexOf('@'));
+            // ref = this.state.authorSnap.ref;
+            // let time = firebase.database.ServerValue.TIMESTAMP;
+            // time = Date(time);
+            // let newData = {
+            //     Author: {
+            //         Username: this.state.userName,
+            //         Email: this.state.email,
+            //         Weight: this.state.weight
+            //     },
+            //     createdAt: time,
+            // }
+            // ref.child(subEmail).set(newData);
         }
 
         if (this.state.newPassword !== '') {
@@ -53,8 +91,30 @@ export default class DisplayEditAccountSettings extends Component {
         }
 
         if (this.state.newWeight !== '') {
-            
+            let user = firebase.auth().currentUser;
+            let email = user.email;
+            let subEmail = email.substr(0, email.indexOf('@'));
+
+            this.reference = firebase.database().ref('Profile/' + subEmail + '/Author');
+            this.reference.update({ Weight: this.state.newWeight })
         }
+    }
+
+    handleAdd() {
+        let email = this.state.newEmail;
+        var subEmail = email.substr(0, email.indexOf('@'));
+        let ref = this.state.authorSnap.ref;
+        let time = firebase.database.ServerValue.TIMESTAMP;
+        time = Date(time);
+        let newData = {
+            Author: {
+                Username: this.state.userName,
+                Email: this.state.email,
+                Weight: this.state.weight
+            },
+            createdAt: time,
+        }
+        ref.child(subEmail).set(newData);
     }
 
     handleChange(event) {
@@ -64,6 +124,7 @@ export default class DisplayEditAccountSettings extends Component {
         let change = {};
         change[field] = value;
         this.setState(change);
+        console.log(change);
     }
 
     render() {
@@ -72,7 +133,12 @@ export default class DisplayEditAccountSettings extends Component {
                 <DisplayHeader />
                 <div className="settings">
                     <div className="email">
-                        <p className="text">Email</p> <input type="text" placeholder={this.state.email}></input>
+                        <p className="text">Email</p>
+                        <input type="text"
+                            placeholder={this.state.email}
+                            name="newEmail"
+                            onChange={(event) => { this.handleChange(event) }}>
+                        </input>
                     </div>
                     <div className="password">
                         <p className="text">Change Password</p>
@@ -83,7 +149,12 @@ export default class DisplayEditAccountSettings extends Component {
                         </input>
                     </div>
                     <div className="weight">
-                        <p className="text">Weight</p> <input type="text" placeholder={this.state.weight}></input> lbs
+                        <p className="text">Weight</p>
+                        <input type="text"
+                            placeholder={this.state.weight}
+                            name="newWeight"
+                            onChange={(event) => { this.handleChange(event) }}>
+                        </input> lbs
                     </div>
 
                     <div className="save">

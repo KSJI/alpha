@@ -16,7 +16,7 @@ export default class SignIn extends React.Component {
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.push(ROUTES.homePage);
+                this.props.history.pushState({state:{pwd:this.state.password}, path:ROUTES.homePage});
             }
         });
         

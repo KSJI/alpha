@@ -6,6 +6,7 @@ import { DisplayCards } from './DisplayCards';
 export class Homepage extends Component {
 
     render() {
+        console.log(this.props.history);
         return (
             <div>
                 <DisplayHeader />
