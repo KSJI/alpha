@@ -16,7 +16,7 @@ export default class SignIn extends React.Component {
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.pushState({state:{pwd:this.state.password}, path:ROUTES.homePage});
+                this.props.history.pushState({state:{pwd:this.state.password}, pathname:ROUTES.homePage});
             }
         });
         
@@ -28,7 +28,7 @@ export default class SignIn extends React.Component {
 
     handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
-        .then(() => this.props.history.push(ROUTES.homePage))
+        .then(() => this.props.history.push({state:{pwd:this.state.password}, pathname: ROUTES.homePage}))
         .catch(err => this.setState({fberror: err}))
     }
     render() {
