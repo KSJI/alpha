@@ -46,7 +46,7 @@ export default class SignUp extends React.Component {
     }
 
     handleSignUp() {
-        if (this.state.email == null || this.state.password !== this.state.confirmPass) {
+        if (this.state.email == null || this.state.password == null) {
             return;
         } else {
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
@@ -55,16 +55,15 @@ export default class SignUp extends React.Component {
                     useruid: user.uid,
                     displayName: this.state.displayName,
                 }))
-                .then(() => this.handleAdd())
+                .then(this.handleAdd())
                 .then(() => this.props.history.push(ROUTES.homePage))
                 .catch(err => this.setState({fberror: err}))
-
         }
     }
 
     handleAdd() {
-        let user = firebase.auth().currentUser;
-        this.setState({useruid: user.uid});
+        console.log('calls');
+        console.log(this.state.useruid);
         let ref = this.state.authorSnap.ref; 
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
@@ -76,7 +75,7 @@ export default class SignUp extends React.Component {
             },
             createdAt: time,
         }
-        ref.child(this.state.useruid).setValue(newData);
+        ref.child(this.state.useruid).set(newData);
     }
 
     render() {
