@@ -48,17 +48,24 @@ export default class DisplayEditAccountSettings extends Component {
             // Concatenate the new email address
             // Add a new entry into the authentication
             // Add the new node in the database
+            let text = prompt(
+                'What is your password?',
+            );
 
-            // user.reauthenticateAndRetrieveDataWithCredential(credential).then(function () {
-            //     // User re-authenticated.
-            // }).catch(function (error) {
-            //     // An error happened.
-            // });
+            let credential = firebase.auth.EmailAuthProvider.credential(
+                user.email, 
+                text
+            );
+            
+            user.reauthenticateAndRetrieveDataWithCredential(credential).then(function () {
+                 // User re-authenticated.
+            }).catch(function (error) {
+              //  An error happened.
+            });
 
             user.updateEmail(this.state.newEmail).then(
                 console.log('success')
             )
-
 
 
 
