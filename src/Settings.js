@@ -41,26 +41,98 @@ export default class DisplayEditAccountSettings extends Component {
         })
     }
 
+
     updateSettings() {
         if (this.state.newEmail !== '') {
+            function sleep(milliseconds) {
+                var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
             let user = firebase.auth().currentUser;
-            // Get the current email node, (erase it?)
-            // Concatenate the new email address
-            // Add a new entry into the authentication
-            // Add the new node in the database
+
+            // Grab the old data
+            let email = user.email;
+            let subEmail = email.substr(0, email.indexOf('@'));
+            this.reference = firebase.database().ref('Profile/' + subEmail);
+            this.reference.on('value', (snapshot) => {
+                let snap = snapshot.val();
+                this.setState({
+                    oldData: snap,
+                })
+                // Set up the new email
+                email = this.state.newEmail;
+                let tempEmail = email.substr(0, email.indexOf('@'));
+                console.log(tempEmail);
+
+                // Create a new node in the firebase database that reflects the new email
+                let ref = firebase.database().ref('Profile/' + tempEmail);
+                console.log(ref);
+                ref.set(this.state.oldData);
+            })
+
+
+            // // Set up the new email
+            // email = this.state.newEmail;
+            // let tempEmail = email.substr(0, email.indexOf('@'));
+
+            // // Create a new node in the firebase database that reflects the new email
+            // let ref = firebase.database().ref('Profile/');
+            // ref.push({ tempEmail: this.state.oldData });
+
+            // let ref = firebase.database().ref('Profile');
+            // this.valueListener = ref.on("value",
+            //     snapshot => {
+            //         let snap = snapshot.val();
+            //         this.setState({
+            //             newSnap: snap
+            //         });
+            //         // sleep(500);
+            //         email = user.email;
+            //         let subEmail = email.substr(0, email.indexOf('@'));
+            //         this.reference = firebase.database().ref('Profile/' + subEmail);
+            //         this.reference.on('value', (snapshot) => {
+            //             let snap = snapshot.val();
+            //             this.setState({
+            //                 oldData: snap,
+            //             });
+            //             sleep(1000);
+            //             ref = snap;
+            //             console.log(ref);
+            //             ref.set({ tempEmail: this.state.oldSnap });
+            //         })
+
+            //     });
+
+            // Grab the old data
+            // email = user.email;
+            // let subEmail = email.substr(0, email.indexOf('@'));
+            // this.reference = firebase.database().ref('Profile/' + subEmail);
+            // this.reference.on('value', (snapshot) => {
+            //     let snap = snapshot.val();
+            //     this.setState({
+            //         oldData: snap,
+            //     });
+            //     sleep(500);
+            // })
+
+            // Have the user reenter their password
             let text = prompt(
                 'What is your password?',
             );
 
+            console.log(this.state.email, this.state.newEmail);
+            // what to pass into reauth
             let credential = firebase.auth.EmailAuthProvider.credential(
-                user.email, 
+                this.state.newEmail,
                 text
             );
-            
-            user.reauthenticateAndRetrieveDataWithCredential(credential).then(function () {
-                 // User re-authenticated.
-            }).catch(function (error) {
-              //  An error happened.
+
+            user.reauthenticateAndRetrieveDataWithCredential(credential).catch(function (error) {
+                console.log(error);
             });
 
             user.updateEmail(this.state.newEmail).then(
@@ -68,6 +140,81 @@ export default class DisplayEditAccountSettings extends Component {
             )
 
 
+
+            sleep(2000);
+
+            // ref = this.state.newSnap;
+            // console.log(ref);
+            // ref.child(tempEmail).set(this.state.oldSnap);
+
+            // this.state.newSnap.ref.child(tempEmail).set(this.state.oldData);
+
+
+            // let ref = firebase.database().ref(`Profile`);
+            // this.valueListener = ref.on("value",
+            //     snapshot => this.setState({ authorSnap: snapshot }));
+
+            // email = this.state.newEmail;
+            // subEmail = email.substr(0, email.indexOf('@'));
+            // ref = this.state.authorSnap.ref;
+            // let time = firebase.database.ServerValue.TIMESTAMP;
+            // time = Date(time);
+            // let newData = {
+            //     Author: {
+            //         Username: this.state.userName,
+            //         Email: this.state.email,
+            //         Weight: this.state.weight
+            //     },
+            //     createdAt: time,
+            // }
+            // ref.child(subEmail).set(newData);
+
+
+
+            // this.reference = firebase.database().ref('Profile');
+            // this.reference.on('value', (snapshot) => {
+            //     let snap = snapshot.val();
+            //     this.setState({
+            //         newSnap: snap,
+            //     });
+            // })
+            // this.reference.child(subEmail).set(this.state.oldData);
+
+
+
+
+
+
+            /*
+ 
+ 
+            // Concatenate the new email
+            let email = this.state.newEmail;
+            var subEmail = email.substr(0, email.indexOf('@'));
+            console.log(subEmail);
+ 
+            // Get current data at the current node
+ 
+            // Add a new node into the database
+ 
+            this.reference = firebase.database().ref('Profile/');
+ 
+ 
+            ref = this.state.authorSnap.ref;
+            let time = firebase.database.ServerValue.TIMESTAMP;
+            time = Date(time);
+            let newData = {
+                Author: {
+                    Username: this.state.userName,
+                    Email: this.state.email,
+                    Weight: this.state.weight
+                },
+                createdAt: time,
+            }
+            ref.child(subEmail).set(newData);
+ 
+ 
+            */
 
             // let user = firebase.auth().currentUser;
             // let ref = firebase.database().ref(`Profile`);
@@ -131,10 +278,10 @@ export default class DisplayEditAccountSettings extends Component {
         let change = {};
         change[field] = value;
         this.setState(change);
-        console.log(change);
     }
 
     render() {
+
         return (
             <div>
                 <DisplayHeader />

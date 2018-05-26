@@ -14,8 +14,18 @@ export class DisplayCards extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            function sleep(milliseconds) {
+                var start = new Date().getTime();
+                for (var i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
+            sleep(1500);
+            
             this.setState({
                 email:user.email,
                 password:user.password,
@@ -29,7 +39,7 @@ export class DisplayCards extends Component {
             this.reference.on('value', (snapshot) => {
                 let snap = snapshot.val();
                 this.setState({
-                    cards: snap,
+                    cards: snap
                 });
             })
         })
