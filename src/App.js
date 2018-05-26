@@ -5,6 +5,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import './App.css';
 import { Homepage } from './Homepage';
+import DisplayAddNewPost from './DisplayAddNewPost';
 
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path={ROUTES.signIn} component={SignIn} />
                     <Route path={ROUTES.signUp} component={SignUp} />
+                    <Route path={ROUTES.newPost} componenet={DisplayAddNewPost} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>

@@ -2,6 +2,10 @@ import React from "react";
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import {Link} from "react-router-dom";
+import {ROUTES} from './constants';
+
+// POST https://vision.googleapis.com/v1/images:annotate?key=YOUR_API_KEY
 //import vision from "@google-cloud/vision";
 //import vision from "@google-cloud/vision";
 
@@ -46,8 +50,25 @@ export default class DisplayAddNewPost extends React.Component {
     }
 
     handleSubmit(evt) {
-        //evt.preventDefault();
+        evt.preventDefault();
         console.log('handle uploading-', this.state.file);
+        // Imports the Google Cloud client library
+        let vision = require('@google-cloud/vision');
+
+        // Creates a client
+        let client = new vision.ImageAnnotatorClient();
+
+        // Performs label detection on the image file
+        client.labelDetection("./imgs/BACKGROUND.png")
+            .then(results => {
+                let labels = results[0].labelAnnotations;
+
+                console.log('Labels:');
+                labels.forEach(label => console.log(label.description));
+            })
+            .catch(err => {
+                console.error('ERROR:', err);
+        });
     //    let messageList = {
     //        body: this.state.body,
     //        createdAt : firebase.database.ServerValue.TIMESTAMP,
