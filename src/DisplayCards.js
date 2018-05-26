@@ -17,7 +17,6 @@ export class DisplayCards extends Component {
     componentWillMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-
                 this.setState({
                     email: user.email,
                     password: user.password,
