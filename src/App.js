@@ -13,10 +13,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact path={ROUTES.signIn} component={SignIn} />
+                    <Route exact path={ROUTES.newPost} component={DisplayAddNewPost} />
                     <Route path={ROUTES.signUp} component={SignUp} />
-                    <Route path={ROUTES.newPost} componenet={DisplayAddNewPost} />
-                    <Redirect to={ROUTES.signIn} />
+                    <Redirect to={ROUTES.newPost} />
                 </Switch>
             </Router>
         );

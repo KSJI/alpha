@@ -4,9 +4,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import {Link} from "react-router-dom";
 import {ROUTES} from './constants';
-
-// POST https://vision.googleapis.com/v1/images:annotate?key=YOUR_API_KEY
-//import vision from "@google-cloud/vision";
+// import vision from "@google-cloud/vision";
 //import vision from "@google-cloud/vision";
 
 
@@ -50,8 +48,8 @@ export default class DisplayAddNewPost extends React.Component {
     }
 
     handleSubmit(evt) {
-        evt.preventDefault();
-        console.log('handle uploading-', this.state.file);
+        //evt.preventDefault();
+       // console.log('handle uploading-', this.state.file);
         // Imports the Google Cloud client library
         let vision = require('@google-cloud/vision');
 
