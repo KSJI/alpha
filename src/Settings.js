@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Link } from 'react-router-dom';
 import { DisplayHeader } from './DisplayHeader';
 import './Settings.css';
 
@@ -74,13 +74,12 @@ export default class DisplayEditAccountSettings extends Component {
             })
 
 
-            
+
             // Have the user reenter their password
             let text = prompt(
-                'What is your password?',
+                'What is your current password?',
             );
 
-            console.log(this.state.email, this.state.newEmail, user.email);
             // what to pass into reauth
             let credential = firebase.auth.EmailAuthProvider.credential(
                 this.state.email,
@@ -100,18 +99,61 @@ export default class DisplayEditAccountSettings extends Component {
 
         if (this.state.newPassword !== '') {
             let user = firebase.auth().currentUser;
+
+            if (this.state.newEmail !== '') {
+                // Have the user reenter their password
+                let text = prompt(
+                    'What is your current password?',
+                );
+
+                // what to pass into reauth
+                let credential = firebase.auth.EmailAuthProvider.credential(
+                    this.state.newEmail,
+                    text
+                );
+
+                user.reauthenticateAndRetrieveDataWithCredential(credential).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                // Have the user reenter their password
+                let text = prompt(
+                    'What is your current password?',
+                );
+
+                // what to pass into reauth
+                let credential = firebase.auth.EmailAuthProvider.credential(
+                    user.email,
+                    text
+                );
+
+                user.reauthenticateAndRetrieveDataWithCredential(credential).catch(function (error) {
+                    console.log(error);
+                });
+            }
+
+
             user.updatePassword(this.state.newPassword).then(
                 console.log('success')
             )
         }
 
         if (this.state.newWeight !== '') {
-            let user = firebase.auth().currentUser;
-            let email = user.email;
-            let subEmail = email.substr(0, email.indexOf('@'));
+            if (this.state.newEmail !== '') {
+                let email = this.state.newEmail;
+                let subEmail = email.substr(0, email.indexOf('@'));
 
-            this.reference = firebase.database().ref('Profile/' + subEmail + '/Author');
-            this.reference.update({ Weight: this.state.newWeight })
+                this.reference = firebase.database().ref('Profile/' + subEmail + '/Author');
+                this.reference.update({ Weight: this.state.newWeight })
+            } else {
+                let user = firebase.auth().currentUser;
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+
+                this.reference = firebase.database().ref('Profile/' + subEmail + '/Author');
+                this.reference.update({ Weight: this.state.newWeight })
+            }
+
         }
     }
 
@@ -153,7 +195,7 @@ export default class DisplayEditAccountSettings extends Component {
                             placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input>
+                        </input><i className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="password">
                         <p className="text">Change Password</p>
@@ -161,7 +203,7 @@ export default class DisplayEditAccountSettings extends Component {
                             name="newPassword"
                             placeholder="*******"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input>
+                        </input><i className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="weight">
                         <p className="text">Weight</p>
@@ -169,7 +211,7 @@ export default class DisplayEditAccountSettings extends Component {
                             placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input> lbs
+                        </input> lbs <i className="fas fa-pencil-alt"></i>
                     </div>
 
                     <div className="save">
