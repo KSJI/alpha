@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-import {ROUTES} from "./constants";
+import { Link } from 'react-router-dom';
+import { ROUTES } from "./constants";
 import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
@@ -9,18 +9,18 @@ export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",  
+            email: "",
             password: ""
         }
     }
 
     componentDidMount() {
-        // this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
-        //     if (user) {
-        //         this.props.history.push(ROUTES.homePage);
-        //     }
-        // });
-        
+        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.props.history.push({ state: { pwd: this.state.password }, pathname: ROUTES.homePage });
+            }
+        });
+
     }
 
     componentWillUnmount() {
@@ -51,8 +51,8 @@ export default class SignIn extends React.Component {
                                 id="email"
                                 className="form-control"
                                 placeholder="your email address"
-                                required 
-                               onInput={evt => this.setState({email: evt.target.value})}/>
+                                required
+                                onInput={evt => this.setState({ email: evt.target.value })} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
@@ -61,7 +61,12 @@ export default class SignIn extends React.Component {
                                 className="form-control"
                                 placeholder="your password"
                                 minLength="6"
-                                onInput={evt => this.setState({password: evt.target.value})}/>
+                                onInput={evt => this.setState({ password: evt.target.value })} />
+                        </div>
+                        <div>
+                            <Link to={ROUTES.forgotPassword}>
+                                <p>Forgot Password?</p>
+                            </Link>
                         </div>
                         <div className="form-group">
                             <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">Sign In</button>

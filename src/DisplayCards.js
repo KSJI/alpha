@@ -16,22 +16,24 @@ export class DisplayCards extends Component {
 
     componentWillMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
-            this.setState({
-                email:user.email,
-                password:user.password,
-                weight:user.weight
-            })
-
-            let email = user.email;
-            let subEmail= email.substr(0, email.indexOf('@')); 
-
-            this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts');
-            this.reference.on('value', (snapshot) => {
-                let snap = snapshot.val();
+            if (user) {
                 this.setState({
-                    cards: snap,
-                });
-            })
+                    email: user.email,
+                    password: user.password,
+                    weight: user.weight
+                })
+
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+
+                this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts');
+                this.reference.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({
+                        cards: snap
+                    });
+                })
+            }
         })
     }
 
@@ -41,6 +43,7 @@ export class DisplayCards extends Component {
             Make a card for each entry in firebase
         */
         let cards = this.state.cards === null ? [] : Object.keys(this.state.cards).map((d) => {
+            console.log(this.state.cards[d]);
             return (
                 <MakeCard key={"post-" + d} post={this.state.cards[d]} />
             )
@@ -56,12 +59,12 @@ export class DisplayCards extends Component {
                         <Link to="/Settings" style={{ color: 'black' }}><i className="fas fa-cog fa-lg"></i></Link>{" "}
                         <button type="button" className="btn btn-primary" onClick={() => {
                             firebase.auth().signOut()
-                            .then(this.props.history.push(ROUTES.signIn));
+                                .then(this.props.history.push(ROUTES.signIn));
                         }}>SIGN OUT</button>
                     </Col>
                 </Router>
                 <Col className="settings-col">
-                    <button>ADD A POST</button>
+                    <button>UPLOAD A NEW POST</button>
                 </Col>
             </div>
         )

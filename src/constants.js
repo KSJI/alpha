@@ -3,9 +3,9 @@ export const ROUTES = {
     signUp: "/signup",
     homePage: "/homepage", 
     acceptTerms: "/acceptterms",
-    resetPassword: "/resetpassword",
     results: "/results",
     newPost: "/newpost",
     deleteConfirmation: "deleteconfirmation",
-    displayEditAccountSettings: "/settings"
+    displayEditAccountSettings: "/settings",
+    forgotPassword: "/forgotPassword"
 }
