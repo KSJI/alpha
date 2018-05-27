@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import {ROUTES} from "./constants";
 import firebase from 'firebase/app';
+import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
 
 export default class SignIn extends React.Component {
@@ -14,27 +15,29 @@ export default class SignIn extends React.Component {
     }
 
     componentDidMount() {
-        this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                this.props.history.push(ROUTES.homePage);
-            }
-        });
+        // this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
+        //     if (user) {
+        //         this.props.history.push(ROUTES.homePage);
+        //     }
+        // });
         
     }
 
     componentWillUnmount() {
         
-        this.authUnlisten();
+       // this.authUnlisten();
     }
 
     handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
-        .then(() => this.props.history.push(ROUTES.homePage))
+        .then(() => this.props.history.push(ROUTES.acceptTerms))
         .catch(err => this.setState({fberror: err}))
     }
     render() {
         return (
+
             <div>
+                <DisplayHeader />
                 <header className="jumbotron jumbotron-fluid bg-primary text-white">
                     <div className="container">
                         <h1>Sign In</h1>

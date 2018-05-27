@@ -56,14 +56,12 @@ export default class SignUp extends React.Component {
                     displayName: this.state.displayName,
                 }))
                 .then(this.handleAdd())
-                .then(() => this.props.history.push(ROUTES.homePage))
+                .then(() => this.props.history.push(ROUTES.acceptTerms))
                 .catch(err => this.setState({fberror: err}))
         }
     }
 
     handleAdd() {
-        console.log('calls');
-        console.log(this.state.useruid);
         let ref = this.state.authorSnap.ref; 
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
@@ -71,7 +69,8 @@ export default class SignUp extends React.Component {
             Author: {
                 Username: this.state.userName,
                 Email: this.state.email,
-                Weight: this.state.weight
+                Weight: this.state.weight,
+                AcceptTerms: 'false'
             },
             createdAt: time,
         }

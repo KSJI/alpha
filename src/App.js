@@ -3,6 +3,7 @@ import{HashRouter as Router, Switch, Redirect, Route} from 'react-router-dom';
 import {ROUTES} from './constants';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import AcceptTerms from './AcceptTerms';
 import './App.css';
 import { Homepage } from './Homepage';
 import DisplayAddNewPost from './DisplayAddNewPost';
@@ -13,9 +14,10 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route exact path={ROUTES.newPost} component={DisplayAddNewPost} />
+                    <Route exact path={ROUTES.signIn} component={SignIn} />
                     <Route path={ROUTES.signUp} component={SignUp} />
-                    <Redirect to={ROUTES.newPost} />
+                    <Route path={ROUTES.acceptTerms} component={AcceptTerms} />
+                    <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>
         );
