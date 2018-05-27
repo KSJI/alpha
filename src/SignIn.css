@@ -1,0 +1,96 @@
+.container {
+    border: 2px solid black;
+    margin-top: 5%;
+    padding: 3%;
+    background-color: white;
+    margin-bottom: 2%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 36pt;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+}
+
+.header {
+    border: 2px solid black;
+    margin-left: 15%;
+    margin-right:  15%;
+    margin-top: 2%;
+    padding: 1%;
+    background-color: white;
+    margin-bottom: 2%;
+    width: 75%;
+}
+
+.form-group {
+    padding-top: 3%;
+    margin-top: 25px;
+    width: 450px;
+}
+
+.form-group-one {
+    padding-top: 5%;
+}
+
+.form-group-two {
+    padding-bottom: 35px;
+    padding-top: 10px;
+}
+
+
+input[type=text], input[type=password] {
+    padding: 7px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    width: 272px;
+    margin: 10px;
+    position: relative; 
+}
+
+#username {
+    left: 65px;
+}
+
+#password {
+    left: 5px;
+}
+
+.username-input, .password-input {
+    padding-right: 10px;
+    float: left;
+    margin-left: 254px;
+}
+
+.username-input {
+    padding-top: 16px;
+}
+
+.password-input {
+    padding-top: 16px;
+}
+
+.button {
+    background-color: white; /* white */
+    color: white;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    
+}
+
+link {
+    font-size: 16px;
+    color: dodgerblue;
+}
+
+.new-message {
+    position: relative;
+    left: 150px;
+}

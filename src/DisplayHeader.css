@@ -1,9 +1,22 @@
-.header {
-    border: 2px solid black;
+/* .header {
+    border: 1px solid #ccc;
     margin-left:15%;
     margin-right:15%;
     margin-top:2%;
-    padding:1%;
+    padding:2px;
     background-color: white;
     margin-bottom:2%;
+    
+} */
+
+.header {
+    border: 1px solid #ccc;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+    padding: 9%;
+    background-color: white;
+    margin-bottom: 2%;
+    text-align: center;
+    width: 75%;
 }
