@@ -4,6 +4,7 @@ import {ROUTES} from './constants';
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import DisplayEditAccountSettings from "./Settings";
+import ForgotPassword from "./ForgotPassword";
 import './App.css';
 import { Homepage } from './Homepage';
 
@@ -17,6 +18,7 @@ class App extends Component {
                     <Route path={ROUTES.signUp} component={SignUp} />
                     <Route path={ROUTES.homePage} component={Homepage} />
                     <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
+                    <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>
