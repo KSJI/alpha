@@ -6,6 +6,6 @@ export const ROUTES = {
     resetPassword: "/resetpassword",
     results: "/results",
     newPost: "/newpost",
-    editAccountSettings: "editaccountsettings",
-    deleteConfirmation: "deleteconfirmation"
+    deleteConfirmation: "deleteconfirmation",
+    displayEditAccountSettings: "/settings"
 }

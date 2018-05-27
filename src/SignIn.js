@@ -30,7 +30,7 @@ export default class SignIn extends React.Component {
 
     handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
-        .then(() => this.props.history.push(ROUTES.acceptTerms))
+        .then(() => this.props.history.push({state:{pwd:this.state.password}, pathname: ROUTES.acceptTerms}))
         .catch(err => this.setState({fberror: err}))
     }
     render() {
