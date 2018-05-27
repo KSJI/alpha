@@ -10,5 +10,3 @@ export class DisplayHeader extends Component {
         )
     }
 }
-
-

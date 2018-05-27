@@ -1,6 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {ROUTES} from './constants';
+import { Link } from "react-router-dom";
+import { ROUTES } from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
 import './SignUp.css';
@@ -10,11 +10,11 @@ export default class SignUp extends React.Component {
         super(props);
         this.state = {
             fullName: "",
-            email: "",  
+            email: "",
             password: "",
             userName: "",
-            confirmPass: "",
             weight: "",
+            useruid: "",
             authorSnap: undefined
         }
     }
@@ -24,16 +24,16 @@ export default class SignUp extends React.Component {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 let user = firebase.auth().currentUser;
-                this.setState({currentUser: user});
-                this.setState({displayName: user.displayName});
-                this.setState({useruid: user.uid});
-                let ref  = firebase.database().ref(`Profile`);
-                this.valueListener = ref.on("value", 
-                snapshot => this.setState({authorSnap: snapshot}));
+                this.setState({ currentUser: user });
+                this.setState({ displayName: user.displayName });
+                this.setState({ useruid: user.uid });
+                let ref = firebase.database().ref(`Profile`);
+                this.valueListener = ref.on("value",
+                    snapshot => this.setState({ authorSnap: snapshot }));
             } else {
-                let ref  = firebase.database().ref(`Profile`);
-                this.valueListener = ref.on("value", 
-                snapshot => this.setState({authorSnap: snapshot}));
+                let ref = firebase.database().ref(`Profile`);
+                this.valueListener = ref.on("value",
+                    snapshot => this.setState({ authorSnap: snapshot }));
             }
         });
     }
@@ -47,35 +47,37 @@ export default class SignUp extends React.Component {
     }
 
     handleSignUp() {
-        if (this.state.email == null || this.state.password !== this.state.confirmPass) {
+        if (this.state.email === '' || this.state.password === '') {
             return;
         } else {
-            this.handleAdd();
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
-            this.state.password)
+                this.state.password)
                 .then(user => user.updateProfile({
                     useruid: user.uid,
-                    displayName: this.state.displayName
+                    displayName: this.state.displayName,
                 }))
-                .then(() => this.props.history.push(ROUTES.homePage))
-                .catch(err => this.setState({fberror: err}))
-
+                .then(this.handleAdd())
+                .then(this.props.history.push(ROUTES.acceptTerms, {pwd:this.state.password}))
+                .catch(err => this.setState({ fberror: err }))
         }
     }
 
     handleAdd() {
-        let ref = this.state.authorSnap.ref; 
+        let email = this.state.email;
+        var subEmail = email.substr(0, email.indexOf('@'));
+        let ref = this.state.authorSnap.ref;
         let time = firebase.database.ServerValue.TIMESTAMP;
         time = Date(time);
         let newData = {
             Author: {
                 Username: this.state.userName,
                 Email: this.state.email,
-                Weight: this.state.weight
+                Weight: this.state.weight,
+                AcceptTerms: 'false'
             },
             createdAt: time,
         }
-        ref.push(newData);
+        ref.child(subEmail).set(newData);
     }
 
     render() {
@@ -157,5 +159,3 @@ export default class SignUp extends React.Component {
         );
     }
 }
-
-
