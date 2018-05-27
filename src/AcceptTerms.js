@@ -31,7 +31,6 @@ export default class AcceptTerms extends React.Component {
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
                     console.log(snap);
-                    console.log(this.state.acceptTerms);
                 })
             }
         })
@@ -47,6 +46,13 @@ export default class AcceptTerms extends React.Component {
 
             <div>
                 <DisplayHeader />
+                <p> WARNING: 
+                    Please be aware of your daily consumptions. 
+                    This is a fun website to help encourage people to 
+                    live a healthier lifestyle not for bulimia, 
+                    anorexia, etc. </p>
+                
+                <p> I accept the terms and conditions of this warning </p>
             </div>
         );
     }
