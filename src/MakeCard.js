@@ -17,7 +17,7 @@ export class MakeCard extends Component {
         return (
             <Card className="card">
                 <CardBody>
-                    <CardTitle>{this.props.post}</CardTitle>
+                    <CardTitle></CardTitle>
                 </CardBody>
                 <CardImg src="" />
                 <CardBody>
