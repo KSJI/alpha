@@ -1,9 +1,9 @@
 import React from "react";
-import firebase from 'firebase/app';
+import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
-import { Link } from "react-router-dom";
-import { ROUTES } from './constants';
+import 'firebase/firestore';
+
 
 
 const divStyle = {
@@ -19,92 +19,186 @@ export default class DisplayAddNewPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            email: "kyle3381@gmail.com",
             meal: "",
             file: "",
             imagePreviewUrl: "", //added
             typeOfMeal: "",
             madeFrom: "",
             totalCalories: "",
+            uid: "",
+            data: [],
+            isLoading: true,
+            urls: "",
             fbError: ""
         };
     }
-
     componentDidMount() {
-
-        var request = require('request'),
-            apiKey = 'acc_aa92c5a583de0dc',
-            apiSecret = '8c3661efff965c18e29ee167256adb29',
-            imageUrl = 'https://firebasestorage.googleapis.com/v0/b/alpha-153de.appspot.com/o/images%2FDeleting%20a%20New%20Post.png?alt=media&token=b5b83565-5a85-40a0-ab63-66b7cdf6c03c';
-
-        request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), function (error, response, body) {
-            console.log('Status:', response.statusCode);
-            console.log('Headers:', JSON.stringify(response.headers));
-            console.log('Response:', body);
-        }).auth(apiKey, apiSecret, true);
-
-       // this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
-       //     if (user) {
-        //    this.setState(
-         //       {displayName : user.displayName,
-         //        uid: user.uid,
-         //        photoURL: user.photoURL
-         //       })
-         //   }
-        // })
+        this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+            this.setState(
+                {uid: user.uid,
+                 email: user.email
+                })
+            }
+        })
     }
 
     componentWillUnmount() {
-        // this.authUnlisten();
+        this.authUnlisten();
     }
 
     handleSubmit(evt) {
-        // evt.preventDefault();
-        // console.log('handle uploading-', this.state.file);
-        // Imports the Google Cloud client library
+        var storageRef = firebase.storage().ref();
+        var file = this.state.file;
+        var metadata = {contentType: 'image/png',};
+        var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
+        //var downloaded = '';
+        uploadTask.on('state_changed', function(snapshot){
+            // Observe state change events such as progress, pause, and resume
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+              case firebase.storage.TaskState.PAUSED: // or 'paused'
+                console.log('Upload is paused');
+                break;
+              case firebase.storage.TaskState.RUNNING: // or 'running'
+                console.log('Upload is running');
+                break;
+            }
+          }, function(error) {
+            // Handle unsuccessful uploads
+            console.log(error)
 
-        // Creates a client
+            switch (error.code) {
+                case 'storage/unauthorized':
+                  // User doesn't have permission to access the object
+                  break;
+            
+                case 'storage/canceled':
+                  // User canceled the upload
+                  break;
 
-        // Performs label detection on the image file
-        // client.labelDetection("./imgs/BACKGROUND.png")
-        //    .then(results => {
-        //        let labels = results[0].labelAnnotations;
+                case 'storage/unknown':
+                // User canceled the upload
+                break;
+                case 'storage/object_not_found':
+                // User canceled the upload
+                break;
 
-        //        console.log('Labels:');
-        //        labels.forEach(label => console.log(label.description));
-        //    })
-        //    .catch(err => {
-        //        console.error('ERROR:', err);
-        // });
-        //    let messageList = {
-        //        body: this.state.body,
-        //        createdAt : firebase.database.ServerValue.TIMESTAMP,
-        //        author : {
-        //            displayName: this.state.displayName,
-        //            photoURL: this.state.photoURL,
-        //            uid: this.state.uid
-        //        }
-        //    };
-        //    this.props.messageRef.push(messageList)
-        //       .then(() => this.setState({body: "", fbError: undefined}))
-        //       .catch(err => this.setState({fbError: err}));
+                case 'storage/bucket_not_found':
+                // User canceled the upload
+                break;
+                
+                case 'storage/quota_exceeded':
+                // User canceled the upload
+                break;
+                
+                case 'storage/unauthenticated':
+                // User canceled the upload
+                break;
+                
+                case 'storage/invalid_checksum':
+                // User canceled the upload
+                break;
+                
+                case 'storage/retry_limit_exceeded':
+                // User canceled the upload
+                break;
+                
+                case 'storage/invalid_event_name':
+                // User canceled the upload
+                break;
+                
+                case 'storage/invalid_url':
+                // User canceled the upload
+                break;
+                
+                case 'storage/invalid-argument':
+                break;
+                
+                case 'storage/no_default_bucket':
+                // User canceled the upload
+                break;
+                
+                case 'storage/cannot_slice_blob':
+                // User canceled the upload
+                break;
+                
+                case 'storage/server_wrong_file_size	':
+                // User canceled the upload
+                break;
+
+            } 
+          }, () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                this.setState({urls : downloadURL})
+                var request = require('request'),
+                apiKey = 'acc_ed444d09ca5972e',
+                apiSecret = '4244876bb30509de06e9cd4ed7c94396',
+                imageUrl = downloadURL;
+
+                request.get('https://cors-anywhere.herokuapp.com/https://api.imagga.com/v1/colors?url='+ encodeURIComponent(imageUrl), (error, response, body) => {
+                                    var data = JSON.parse(response.body);
+                                    data = data.results[0].info.image_colors
+                                    //console.log(data.results[0].info.image_colors);
+                                    this.setState({data: data});
+                                    console.log(this.state);
+                                    let email = this.state.email;
+                                    var subEmail = email.substr(0, email.indexOf('@'));
+                                    console.log(this.state.data);
+                                    let time = firebase.database.ServerValue.TIMESTAMP;
+                                    time = Date(time);
+                                    let newData = {
+                                        email: this.state.email,
+                                        meal: this.state.meal,
+                                        typeOfMeal: this.state.typeOfMeal,
+                                        madeFrom: this.state.madeFrom,
+                                        totalCalories: this.state.totalCalories,
+                                        data: this.state.data,
+                                        urls: this.state.urls,
+                                        createdAt: time
+                                    }
+                this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
+                // put together the data
+                this.reference.push(newData);
+                                }).auth(apiKey, apiSecret, true)
+            })
+        })
+        
     }
 
+    handleImageChange(e) {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+        reader.readAsDataURL(file)
+    }
 
     render() {
-        let { imagePreviewUrl } = this.state;
+        let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />)
+            $imagePreview = (<img src= {imagePreviewUrl}/>) 
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
-        }
+        } 
         return (
             <div className="d-flex justify-content-center p-5">
-                <div className="card d-flex justify-content-center" style={cardStyle}>
-                    <div className="card-body">
-                        <div className="input-group pb-3 d-flex flex-column">
-                            <div className="d-flex">
-                                <p>meal: </p>
+            <div className="card d-flex justify-content-center" style={cardStyle}>
+                <div className="card-body">
+                    <div className="input-group pb-3 d-flex flex-column">
+                        <div className="d-flex">
+                            <p>meal: </p>
                                 <input type="text" style={divStyle}
                                     className="form-control"
                                     value={this.state.meal}
@@ -113,21 +207,21 @@ export default class DisplayAddNewPost extends React.Component {
                                     })}
                                     placeholder="type here"
                                 />
-                            </div>
-                            <div className="PreviewComponenet">
-                                <div className="imgPreview">  {$imagePreview}
-                                </div>
-                                <div className="d-flex">
-                                    <p>File to upload: </p>
-                                    <input type="file" style={divStyle}
-                                        className="form-control"
-                                        onChange={evt => this.handleImageChange(evt)}
-                                    />
-                                </div>
-                            </div>
-                            <p>Food Information</p>
-                            <div className="d-flex">
-                                <p>Type of Meal: </p>
+                        </div>
+                        <div className="PreviewComponenet">
+                        <div className="imgPreview">  {$imagePreview}
+                        </div>
+                        <div className="d-flex">
+                            <p>File to upload: </p>
+                                <input type="file" style={divStyle}
+                                    className="form-control"
+                                    onChange={evt => this.handleImageChange(evt)}
+                                />
+                        </div>
+                        </div>
+                        <p>Food Information</p>
+                        <div className="d-flex">
+                            <p>Type of Meal: </p>
                                 <input type="text" style={divStyle}
                                     className="form-control"
                                     value={this.state.typeOfMeal}
@@ -136,10 +230,10 @@ export default class DisplayAddNewPost extends React.Component {
                                     })}
                                     placeholder="type here"
                                 />
-                                <p className="ml-2">*optional*</p>
-                            </div>
-                            <div className="d-flex">
-                                <p>Made From: </p>
+                            <p className="ml-2">*optional*</p>
+                        </div>
+                        <div className="d-flex">
+                            <p>Made From: </p>
                                 <input type="text" style={divStyle}
                                     className="form-control"
                                     value={this.state.madeFrom}
@@ -148,9 +242,9 @@ export default class DisplayAddNewPost extends React.Component {
                                     })}
                                     placeholder="type here"
                                 />
-                            </div>
-                            <div className="d-flex">
-                                <p>Total Calories: </p>
+                        </div>
+                        <div className="d-flex">
+                            <p>Total Calories: </p>
                                 <input type="text" style={divStyle}
                                     className="form-control"
                                     value={this.state.totalCalories}
@@ -159,9 +253,9 @@ export default class DisplayAddNewPost extends React.Component {
                                     })}
                                     placeholder="type here"
                                 />
-                                <p className="ml-2">*optional*</p>
-                            </div>
+                            <p className="ml-2">*optional*</p>
                         </div>
+                    </div>
                     </div>
                     <div className="d-flex">
                         <button type="button">Cancel</button>
