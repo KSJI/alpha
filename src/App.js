@@ -21,6 +21,7 @@ class App extends Component {
                     <Route path={ROUTES.acceptTerms} component={AcceptTerms} />
                     <Route path={ROUTES.homePage} component={Homepage} />
                     <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
+                    <Route path={ROUTES.newPost} component={DisplayAddNewPost} />
                     <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
