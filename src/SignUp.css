@@ -1,0 +1,115 @@
+.container {
+    border: 1px solid #ccc;
+    margin-top: 2.5%;
+    padding: 2%;
+    background-color: white;
+    margin-bottom: 2%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 48pt;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+    text-align: center;
+}
+
+.form-control {
+    margin-left: 5px;
+}
+
+.form-group-one {
+    padding-top: 0px;
+    width: 800px;
+}
+
+.form-group-two, .form-group-three, .form-group-four {
+    padding-top: 2%;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    width: 800px;
+}
+
+.form-group-five {
+    padding-top: 2%;
+    padding-bottom: 12px;
+    padding-right: 0px;
+    width: 800px;
+}
+
+input[type=text], input[type=number] {
+    padding: 7px;
+    padding-right: 0px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+    
+
+}
+
+input[type=text], input[type=password] {
+    width: 288px;
+}
+
+input[type=number] {
+    width: 250px;
+}
+
+#name {
+    left: 80px;
+}
+
+#email {
+    left: 113px;
+}
+
+#weight {
+    left: 104px;
+    margin: 10px;
+}
+
+#username {
+    left: 78px;
+}
+
+#password {
+    left: 0px;    
+}
+
+.label-one, .label-two, .label-three, .label-four, .label-five {
+    padding-top: 15px;
+    float: left;
+    margin-left: 255px;
+    padding-right: 0px;
+}
+
+.form-group {
+    width: 450px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+    border: 1px solid #ccc;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 6px;
+    margin-bottom: 5px;
+}
+
+button {
+    box-shadow: none;
+    border: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -2px;
+}
+
+.lbs {
+    display: inline-block;
+    position: relative;
+    top: 60px;
+    left: -25px;
+}

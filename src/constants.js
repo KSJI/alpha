@@ -1,4 +1,11 @@
 export const ROUTES = {
-    displayAddNewPost:"/",
-    displayResult:"/result"
+    signIn: "/signin",
+    signUp: "/signup",
+    homePage: "/homepage", 
+    acceptTerms: "/acceptterms",
+    results: "/results",
+    newPost: "/newpost",
+    deleteConfirmation: "deleteconfirmation",
+    displayEditAccountSettings: "/settings",
+    forgotPassword: "/forgotPassword"
 }

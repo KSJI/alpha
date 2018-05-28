@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+
 
 var config = {
     apiKey: "AIzaSyBY9kjs_uZLG7g7UA-BQzjKeQkc6vBdquE",

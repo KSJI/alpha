@@ -15,7 +15,6 @@ const cardStyle = {
 };
 
 
-
 export default class DisplayAddNewPost extends React.Component {
     constructor(props) {
         super(props);
