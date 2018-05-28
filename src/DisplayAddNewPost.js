@@ -1,5 +1,7 @@
 import React from "react";
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
+import {ROUTES} from "./constants";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
@@ -258,7 +260,7 @@ export default class DisplayAddNewPost extends React.Component {
                     </div>
                     </div>
                     <div className="d-flex">
-                        <button type="button">Cancel</button>
+                        <Link to={ROUTES.homePage}><button type="button">Cancel</button></Link>
                         <button type="button" onClick={evt => this.handleSubmit()}>Submit</button>
                     </div>
                 </div>
