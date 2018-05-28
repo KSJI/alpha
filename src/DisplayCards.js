@@ -64,7 +64,7 @@ export class DisplayCards extends Component {
                     </Col>
                 </Router>
                 <Col className="settings-col">
-                    <button>UPLOAD A NEW POST</button>
+                    <Link to={ROUTES.displayAddNewPost}><button>UPLOAD A NEW POST</button></Link>
                 </Col>
             </div>
         )

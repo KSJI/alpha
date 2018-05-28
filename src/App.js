@@ -22,6 +22,7 @@ class App extends Component {
                     <Route path={ROUTES.homePage} component={Homepage} />
                     <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
                     <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
+                    <Route path={ROUTES.displayAddNewPost} component={DisplayAddNewPost} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>

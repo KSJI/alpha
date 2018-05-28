@@ -30,7 +30,6 @@ export default class AcceptTerms extends React.Component {
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    console.log(snap);
                 })
             }
         })
