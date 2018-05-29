@@ -37,6 +37,10 @@ export class DisplayCards extends Component {
         })
     }
 
+    componentWillUnmount() {
+        this.authUnlisten();
+    }
+
 
     render() {
         /*
