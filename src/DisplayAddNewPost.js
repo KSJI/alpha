@@ -51,15 +51,10 @@ export default class DisplayAddNewPost extends React.Component {
         this.authUnlisten();
     }
 
-    handleSubmit(evt) {
-        this.handleSubmit2(evt), () => {
-            //this.props.history.push(ROUTES.homePage)
-            console.log("hello")
-        }
-        
-    }
 
-    handleSubmit2(evt) {
+
+
+    handleSubmit() {
         var storageRef = firebase.storage().ref();
         var file = this.state.file;
         var metadata = { contentType: 'image/png', };
@@ -142,45 +137,46 @@ export default class DisplayAddNewPost extends React.Component {
                     break;
 
             }
-        }, () => {
-            // Handle successful uploads on complete
-            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                this.setState({ urls: downloadURL })
-                var request = require('request'),
-                    apiKey = 'acc_ed444d09ca5972e',
-                    apiSecret = '4244876bb30509de06e9cd4ed7c94396',
-                    imageUrl = downloadURL;
-
-                request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), (error, response, body) => {
-                    var data = JSON.parse(response.body);
-                    data = data.results[0].info.image_colors
-                    //console.log(data.results[0].info.image_colors);
-                    this.setState({ data: data });
-                    console.log(this.state);
-                    let email = this.state.email;
-                    var subEmail = email.substr(0, email.indexOf('@'));
-                    let time = firebase.database.ServerValue.TIMESTAMP;
-                    time = Date(time);
-                    console.log(this.state.urls);
-                    let newData = {
-                        email: this.state.email,
-                        meal: this.state.meal,
-                        typeOfMeal: this.state.typeOfMeal,
-                        madeFrom: this.state.madeFrom,
-                        totalCalories: this.state.totalCalories,
-                        data: this.state.data,
-                        urls: this.state.urls,
-                        createdAt: time
-                    }
-                    this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
-                    // put together the data
-                    this.reference.push(newData);
-                }).auth(apiKey, apiSecret, true)
-            })
         })
-        //this.props.history.push(ROUTES.homePage);
+        this.addData(uploadTask);
+    }
 
+    addData(uploadTask) {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.setState({ urls: downloadURL })
+            var request = require('request'),
+            apiKey = 'acc_ed444d09ca5972e',
+            apiSecret = '4244876bb30509de06e9cd4ed7c94396',
+            imageUrl = downloadURL;
+
+            request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), (error, response, body) => {
+                var data = JSON.parse(response.body);
+                data = data.results[0].info.image_colors
+                //console.log(data.results[0].info.image_colors);
+                this.setState({ data: data });
+                console.log(this.state);
+                let email = this.state.email;
+                var subEmail = email.substr(0, email.indexOf('@'));
+                let time = firebase.database.ServerValue.TIMESTAMP;
+                time = Date(time);
+                console.log(this.state.urls);
+                let newData = {
+                    email: this.state.email,
+                    meal: this.state.meal,
+                    typeOfMeal: this.state.typeOfMeal,
+                    madeFrom: this.state.madeFrom,
+                    totalCalories: this.state.totalCalories,
+                    data: this.state.data,
+                    urls: this.state.urls,
+                    createdAt: time
+                }
+                this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
+                // put together the data
+                this.reference.push(newData);
+            }).auth(apiKey, apiSecret, true)
+        })
     }
 
     handleImageChange(e) {
@@ -271,7 +267,7 @@ export default class DisplayAddNewPost extends React.Component {
                     </div>
                     <div className="d-flex">
                         <Link to={ROUTES.homePage}><button type="button">Cancel</button></Link>
-                        <button type="button" onClick={evt => this.handleSubmit()}>Submit</button>
+                        <button type="button" onClick={evt => this.handleSubmit(evt)}>Submit</button>
                     </div>
                 </div>
             </div>
