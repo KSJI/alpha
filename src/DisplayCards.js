@@ -32,6 +32,18 @@ export class DisplayCards extends Component {
                     this.setState({
                         cards: snap
                     });
+                    if (snap !== null) {
+                        let revCards = [];
+                        for (var i = Object.keys(snap).length - 1; i >= 0; i--) {
+                            revCards.push(Object.values(snap)[i])
+                        }
+                        this.setState({
+                            cards: revCards
+                        })
+                    }
+
+
+
                 })
             }
         })

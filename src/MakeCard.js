@@ -37,7 +37,7 @@ export class MakeCard extends Component {
                         <CardTitle>{this.state.date}</CardTitle>
                         <CardText>{this.state.imgName}</CardText>
                     </CardBody>
-                    <CardImg src={this.state.imgUrl} />
+                    <CardImg width={"90%"}src={this.state.imgUrl} />
                     <CardBody>
                     </CardBody>
                 </Card>
