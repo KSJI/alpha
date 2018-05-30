@@ -19,7 +19,7 @@ export default class DisplayAddNewPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "kyle3381@gmail.com",
+            email: "",
             meal: "",
             file: "",
             imagePreviewUrl: "", //added
@@ -160,6 +160,7 @@ export default class DisplayAddNewPost extends React.Component {
                                         totalCalories: this.state.totalCalories,
                                         data: this.state.data,
                                         urls: this.state.urls,
+                                        file: file.name,
                                         createdAt: time
                                     }
                 this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
