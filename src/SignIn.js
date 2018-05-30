@@ -25,8 +25,7 @@ export default class SignIn extends React.Component {
     }
 
     componentWillUnmount() {
-
-        // this.authUnlisten();
+        this.authUnlisten();
     }
 
     handleSignIn() {
@@ -34,6 +33,7 @@ export default class SignIn extends React.Component {
             .then(() => this.props.history.push({ state: { pwd: this.state.password }, pathname: ROUTES.acceptTerms }))
             .catch(err => this.setState({ fberror: err }))
     }
+
     render() {
         return (
 
@@ -41,12 +41,10 @@ export default class SignIn extends React.Component {
                 <DisplayHeader />
                 <div className="container">
                     <div className="form-group-one">
-                        <label className="username-input" htmlFor="username">Username</label>
+                        <label className="username-input" htmlFor="email">Username</label>
                         <input type="text"
                             id="username"
                             className="form-control"
-                            //placeholder="your email address"
-                            required
                             onInput={evt => this.setState({ email: evt.target.value })} />
                     </div>
                     <div className="form-group-two">
@@ -54,7 +52,6 @@ export default class SignIn extends React.Component {
                         <input type="password"
                             id="password"
                             className="form-control"
-                            //placeholder="your password"
                             minLength="6"
                             onInput={evt => this.setState({ password: evt.target.value })} />
                     </div>
@@ -63,7 +60,7 @@ export default class SignIn extends React.Component {
                             <p className='forgot-password'>Forgot Password?</p>
                         </Link>
                     </div>
-                    
+
                     <div className="form-group">
                         <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
                     </div>

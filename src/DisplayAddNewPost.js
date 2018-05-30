@@ -208,7 +208,7 @@ export default class DisplayAddNewPost extends React.Component {
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />)
+            $imagePreview = (<img alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
         }
