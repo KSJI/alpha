@@ -4,6 +4,8 @@ import {ROUTES} from "./constants";
 import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
+import './AcceptTerms.css';
+
 
 export default class AcceptTerms extends React.Component {
     constructor(props) {
@@ -46,13 +48,16 @@ export default class AcceptTerms extends React.Component {
 
             <div>
                 <DisplayHeader />
-                <p> WARNING: 
-                    Please be aware of your daily consumptions. 
-                    This is a fun website to help encourage people to 
-                    live a healthier lifestyle not for bulimia, 
-                    anorexia, etc. </p>
-                
-                <p> I accept the terms and conditions of this warning </p>
+                <div className='container'>
+                    <p className='warning'> 
+                        WARNING: 
+                        Please be aware of your daily consumptions. 
+                        This is a fun website to help encourage people to 
+                        live a healthier lifestyle not for bulimia, 
+                        anorexia, etc. </p>
+                    
+                    <p className='accept'> I accept the terms and conditions of this warning </p>
+                </div>
             </div>
         );
     }

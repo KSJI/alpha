@@ -5,7 +5,6 @@ import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
 import './SignIn.css';
-import './DisplayHeader.css';
 
 export default class SignIn extends React.Component {
     constructor(props) {
@@ -39,43 +38,37 @@ export default class SignIn extends React.Component {
         return (
 
             <div>
-                <header className="jumbotron jumbotron-fluid bg-primary text-white">
-                    <div className="container">
-                        <h1>KSJI</h1>
+                <DisplayHeader />
+                <div className="container">
+                    <div className="form-group-one">
+                        <label className="username-input" htmlFor="username">Username</label>
+                        <input type="text"
+                            id="username"
+                            className="form-control"
+                            //placeholder="your email address"
+                            required
+                            onInput={evt => this.setState({ email: evt.target.value })} />
                     </div>
-                </header>
-                <main>
-                    <div className="container">
-                        <div className="form-group-one">
-                            <label className="username-input" htmlFor="username">Username</label>
-                            <input type="text"
-                                id="username"
-                                className="form-control"
-                                //placeholder="your email address"
-                                required
-                                onInput={evt => this.setState({ email: evt.target.value })} />
-                        </div>
-                        <div className="form-group-two">
-                            <label className="password-input" htmlFor="password">Password</label>
-                            <input type="password"
-                                id="password"
-                                className="form-control"
-                                //placeholder="your password"
-                                minLength="6"
-                                onInput={evt => this.setState({ password: evt.target.value })} />
-                        </div>
-                        <div>
-                            <Link to={ROUTES.forgotPassword}>
-                                <p>Forgot Password?</p>
-                            </Link>
-                        </div>
-                        {/* <p className="forgot-password"><Link to={ROUTES.forgotPassword}> Forgot Password? </Link> </p> */}
-                        <div className="form-group">
-                            <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
-                        </div>
-                        <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>
+                    <div className="form-group-two">
+                        <label className="password-input" htmlFor="password">Password</label>
+                        <input type="password"
+                            id="password"
+                            className="form-control"
+                            //placeholder="your password"
+                            minLength="6"
+                            onInput={evt => this.setState({ password: evt.target.value })} />
                     </div>
-                </main>
+                    <div>
+                        <Link to={ROUTES.forgotPassword}>
+                            <p className='forgot-password'>Forgot Password?</p>
+                        </Link>
+                    </div>
+                    
+                    <div className="form-group">
+                        <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
+                    </div>
+                    <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>
+                </div>
             </div>
         );
     }

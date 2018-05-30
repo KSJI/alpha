@@ -190,28 +190,36 @@ export default class DisplayEditAccountSettings extends Component {
                 <DisplayHeader />
                 <div className="settings">
                     <div className="email">
-                        <p className="text">Email</p>
+                        <label className="email-label" htmlFor="email">Email</label>
+                        {/* <p className="text">Email</p> */}
                         <input type="text"
-                            placeholder={this.state.email}
+                            id="email"
+                            // placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input><i className="fas fa-pencil-alt"></i>
+                        </input><i id="icon-one" className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="password">
-                        <p className="text">Change Password</p>
+                        <label className="password-label" htmlFor="password">Change Password</label>
+                        {/* <p className="text">Change Password</p> */}
                         <input type="password"
+                            id="password-change"
                             name="newPassword"
-                            placeholder="*******"
+                            // placeholder="*******"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input><i className="fas fa-pencil-alt"></i>
+                        </input><i id="icon-two" className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="weight">
-                        <p className="text">Weight</p>
+                        <label className="weight-label" htmlFor="weight">Weight</label>
+                        {/* <p className="text">Weight</p> */}
                         <input type="text"
-                            placeholder={this.state.weight}
+                            id="weight"
+                            // placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input> lbs <i className="fas fa-pencil-alt"></i>
+                        </input> 
+                        <p className="lbs"> lbs </p>
+                        <i id="icon-three" className="fas fa-pencil-alt"></i>
                     </div>
 
                     <div className="save">

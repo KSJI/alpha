@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import { ROUTES } from "./constants";
 import { HashRouter as Router, Link } from 'react-router-dom';
 import { DisplayHeader } from './DisplayHeader';
+import './ForgotPassword.css';
 
 
 export default class ForgotPassword extends Component {
@@ -31,21 +32,25 @@ export default class ForgotPassword extends Component {
                 <DisplayHeader />
                 <div className="inputs">
                     <div className="emailInput">
-                        <p>Email</p> <input type="text"
+                        <label className="email-label" htmlFor="email">Email</label>
+                        <input type="text"
                             id="email"
                             className="form-control"
                             required
                             onInput={evt => this.setState({ email: evt.target.value })} />
                     </div>
                     <div className="usernameInput">
-                        <p>Username</p>
+                        <label className="username-label" htmlFor="username">Username</label>
                         <input type='text'
+                            id="username"
                             className='form-control'
                             required
                             onInput={evt => this.setState({ username: evt.target.value })} />
                     </div>
-                    <p>An email will be sent to reset your password</p>
-                    <button onClick={() => { this.handleReset() }}>RESET PASSWORD</button>
+                    <p className='notification-message'>An email will be sent to reset your password</p>
+                    <div className="button">
+                        <button onClick={() => { this.handleReset() }}>RESET PASSWORD</button>
+                    </div>
                 </div>
             </div>
         )
