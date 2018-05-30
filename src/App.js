@@ -25,6 +25,7 @@ class App extends Component {
                     <Route path={ROUTES.newPost} component={DisplayAddNewPost} />
                     <Route path={ROUTES.results} component={DisplayResult} />
                     <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
+                    <Route path={ROUTES.displayAddNewPost} component={DisplayAddNewPost} />
                     <Redirect to={ROUTES.signIn} />
                 </Switch>
             </Router>
