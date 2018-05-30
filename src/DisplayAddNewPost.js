@@ -52,11 +52,16 @@ export default class DisplayAddNewPost extends React.Component {
     }
 
     handleSubmit(evt) {
-        this.handleSubmit2(evt), () => {
-            //this.props.history.push(ROUTES.homePage)
-            console.log("hello")
-        }
+        // async function waitForSubmit(evt) {
+        //     this.handleSubmit2(evt);
+        //     console.log('lit');
+        // }
+        // waitForSubmit(event);
+       
         
+        this.handleSubmit2(evt);
+        //this.props.history.push(ROUTES.homePage)
+
     }
 
     handleSubmit2(evt) {
@@ -158,6 +163,9 @@ export default class DisplayAddNewPost extends React.Component {
                     //console.log(data.results[0].info.image_colors);
                     this.setState({ data: data });
                     console.log(this.state);
+                    if (this.state.urls !== "") {
+                        this.props.history.push(ROUTES.homePage)
+                    }
                     let email = this.state.email;
                     var subEmail = email.substr(0, email.indexOf('@'));
                     let time = firebase.database.ServerValue.TIMESTAMP;
