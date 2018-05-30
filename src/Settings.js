@@ -203,6 +203,13 @@ export default class DisplayEditAccountSettings extends Component {
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-one" className="fas fa-pencil-alt"></i>
                     </div>
+                    {/* <div className="form-group-one">
+                        <label className="username-input" htmlFor="email">Username</label>
+                        <input type="text"
+                            id="username"
+                            className="form-control"
+                            onInput={evt => this.setState({ email: evt.target.value })} />
+                    </div> */}
                     <div className="password">
                         <label className="password-label" htmlFor="password">Change Password</label>
                         {/* <p className="text">Change Password</p> */}
