@@ -198,7 +198,7 @@ export default class DisplayEditAccountSettings extends Component {
                         {/* <p className="text">Email</p> */}
                         <input type="text"
                             id="email"
-                            // placeholder={this.state.email}
+                            placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-one" className="fas fa-pencil-alt"></i>
@@ -209,7 +209,7 @@ export default class DisplayEditAccountSettings extends Component {
                         <input type="password"
                             id="password-change"
                             name="newPassword"
-                            // placeholder="*******"
+                            placeholder="*******"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-two" className="fas fa-pencil-alt"></i>
                     </div>
@@ -218,7 +218,7 @@ export default class DisplayEditAccountSettings extends Component {
                         {/* <p className="text">Weight</p> */}
                         <input type="text"
                             id="weight"
-                            // placeholder={this.state.weight}
+                            placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input> 
