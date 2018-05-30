@@ -41,6 +41,10 @@ export default class DisplayEditAccountSettings extends Component {
         })
     }
 
+    componentWillUnmount() {
+        this.authUnlisten();
+    }
+
 
     updateSettings() {
         if (this.state.newEmail !== '') {

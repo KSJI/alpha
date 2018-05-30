@@ -7,5 +7,6 @@ export const ROUTES = {
     newPost: "/newpost",
     deleteConfirmation: "deleteconfirmation",
     displayEditAccountSettings: "/settings",
-    forgotPassword: "/forgotPassword"
+    forgotPassword: "/forgotPassword",
+    displayAddNewPost: "/newPost"
 }

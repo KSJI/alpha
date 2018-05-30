@@ -37,13 +37,16 @@ export class DisplayCards extends Component {
         })
     }
 
+    componentWillUnmount() {
+        this.authUnlisten();
+    }
+
 
     render() {
         /*
             Make a card for each entry in firebase
         */
         let cards = this.state.cards === null ? [] : Object.keys(this.state.cards).map((d) => {
-            console.log(this.state.cards[d]);
             return (
                 <MakeCard key={"post-" + d} post={this.state.cards[d]} />
             )
@@ -64,7 +67,7 @@ export class DisplayCards extends Component {
                     </Col>
                 </Router>
                 <Col className="settings-col">
-                    <button>UPLOAD A NEW POST</button>
+                    <Link to={ROUTES.displayAddNewPost}><button>UPLOAD A NEW POST</button></Link>
                 </Col>
             </div>
         )
