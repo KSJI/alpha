@@ -51,20 +51,8 @@ export default class DisplayAddNewPost extends React.Component {
         this.authUnlisten();
     }
 
+
     handleSubmit(evt) {
-        // async function waitForSubmit(evt) {
-        //     this.handleSubmit2(evt);
-        //     console.log('lit');
-        // }
-        // waitForSubmit(event);
-       
-        
-        this.handleSubmit2(evt);
-        //this.props.history.push(ROUTES.homePage)
-
-    }
-
-    handleSubmit2(evt) {
         var storageRef = firebase.storage().ref();
         var file = this.state.file;
         var metadata = { contentType: 'image/png', };

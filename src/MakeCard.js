@@ -21,7 +21,8 @@ export class MakeCard extends Component {
         this.state = {
             imgUrl: '',
             date: '',
-            imgName: ''
+            imgName: '',
+            ref: ''
         }
     }
 
@@ -30,6 +31,7 @@ export class MakeCard extends Component {
         let date = this.props.post.createdAt;
         date = date.split(" ");
         date = date[1] + " " + date[2] + ", " + date[3]
+
 
         // set the state
         this.setState({
@@ -47,28 +49,26 @@ export class MakeCard extends Component {
             ref: this.props.post.ref
         }
     }
-    
+
 
 
 
     render() {
         return (
-            // <Link to={ROUTES.viewPost}> // might not be viewPost
-                <Card className="card">
-                    <CardBody>
-                        <CardTitle>{this.state.date}</CardTitle>
-                        <CardText>{this.state.imgName}</CardText>
-                    </CardBody>
-                    
-                        <Link 
-                            to={ROUTES.results}
-                            >
-                            <CardImg src={this.state.imgUrl}/>
-                        </Link>
-                    <CardBody>
-                    </CardBody>
-                </Card>
-            // </Link>
+            <Card className="card">
+                <CardBody>
+                    <CardTitle>{this.state.date}</CardTitle>
+                    <CardText>{this.state.imgName}</CardText>
+                </CardBody>
+
+                <Link
+                    to={{ pathname: ROUTES.results, state: { reference: this.props.reference } }}
+                >
+                    <CardImg src={this.state.imgUrl} />
+                </Link>
+                <CardBody>
+                </CardBody>
+            </Card>
         )
     }
 }
@@ -77,44 +77,60 @@ export class Hello extends MakeCard {
     constructor(props) {
         super(props);
         this.state = {
-            imgUrl: values.imgUrl,
-            imgName: values.imgName,
-            typeOfMeal: values.typeOfMeal,
-            madeFrom: values.madeFrom,
-            totalCalories: values.totalCalories,
-            data: values.data
+            imgUrl: "",
+            imgName: "",
+            typeOfMeal: "",
+            madeFrom: "",
+            totalCalories: "",
+            data: []
         }
     }
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
-             if (user) {
-             this.setState(
-                 {uid: user.uid,
+            if (user) {
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+
+                this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts/' + this.props.location.state.reference);
+                this.reference.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({
+                        imgUrl: snap.urls,
+                        imgName:snap.meal,
+                        typeOfMeal:snap.typeOfMeal,
+                        madeFrom:snap.madeFrom,
+                        totalCalories:snap.totalCalories,
+                        data:snap.data
+                    });
                 })
+
+                this.setState(
+                    {
+                        uid: user.uid,
+                    })
             }
         })
-        
+
     }
     componentWillUnmount() {
         this.authUnlisten();
-    }    
+    }
 
     render() {
-        console.log(this.state);
         return (
             <div>
                 <p>{this.state.imgName}</p>
                 <div>
-                <Link 
-                 to={ROUTES.deleteConfirmation}
-                >
-                <button>Delete</button>
-                </Link>
+                    <Link
+                        to={ROUTES.deleteConfirmation}
+                    >
+                        <button>Delete</button>
+                    </Link>
                 </div>
 
-                <img src={this.state.imgUrl} alt="food"/>
+                <img src={this.state.imgUrl} alt="food" />
                 <p>colors</p>
-                {this.state.data.map(data => <div className="input-color"><div className="color-box" style={{backgroundColor: data.html_code}}>{console.log(data.html_code)}</div></div>
+                {this.state.data.map(data => <div className="input-color"><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>
                 )}
                 <p>percentage</p>
                 {this.state.data.map(data => <p>{data.percent} %</p>)}
@@ -134,17 +150,18 @@ export class DeletePost extends React.Component {
 
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
-             if (user) {
-             this.setState(
-                 {uid: user.uid,
-                })
+            if (user) {
+                this.setState(
+                    {
+                        uid: user.uid,
+                    })
             }
         })
-        
+
     }
-    
+
     render() {
-        return(
+        return (
             <Card className="card">
                 <CardBody>
                     <CardText>Do you want to delete this image?</CardText>

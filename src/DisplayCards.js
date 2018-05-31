@@ -47,7 +47,7 @@ export class DisplayCards extends Component {
         */
         let cards = this.state.cards === null ? [] : Object.keys(this.state.cards).map((d) => {
             return (
-                <MakeCard key={"post-" + d} post={this.state.cards[d]} />
+                <MakeCard key={"post-" + d} post={this.state.cards[d]} reference={d}/>
             )
         })
 
