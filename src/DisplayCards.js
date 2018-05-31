@@ -40,8 +40,7 @@ export class DisplayCards extends Component {
     componentWillUnmount() {
         this.authUnlisten();
     }
-
-
+    
     render() {
         /*
             Make a card for each entry in firebase
@@ -67,7 +66,9 @@ export class DisplayCards extends Component {
                     </Col>
                 </Router>
                 <Col className="settings-col">
-                    <Link to={ROUTES.displayAddNewPost}><button>UPLOAD A NEW POST</button></Link>
+                    <Link to={ROUTES.displayAddNewPost}>
+                        <button>UPLOAD A NEW POST</button>
+                    </Link>
                 </Col>
             </div>
         )
