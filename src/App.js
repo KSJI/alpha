@@ -25,7 +25,7 @@ class App extends Component {
                     <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
                     <Route path={ROUTES.newPost} component={DisplayAddNewPost} />
                     <Route path={ROUTES.results} component={DisplayResult} />
-                    <Route path={ROUTES.deleteconfirmation} component={DeletePost}/>
+                    <Route path={ROUTES.deleteConfirmation} component={DeletePost}/>
                     <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
                     <Route path={ROUTES.displayAddNewPost} component={DisplayAddNewPost} />
                     <Redirect to={ROUTES.signIn} />
