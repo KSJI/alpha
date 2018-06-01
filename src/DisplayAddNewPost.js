@@ -158,6 +158,7 @@ export default class DisplayAddNewPost extends React.Component {
                     var subEmail = email.substr(0, email.indexOf('@'));
                     let time = firebase.database.ServerValue.TIMESTAMP;
                     time = Date(time);
+                    let fileName = this.state.file;
                     console.log(this.state.urls);
                     let newData = {
                         email: this.state.email,
@@ -167,6 +168,7 @@ export default class DisplayAddNewPost extends React.Component {
                         totalCalories: this.state.totalCalories,
                         data: this.state.data,
                         urls: this.state.urls,
+                        file: fileName.name,
                         createdAt: time
                     }
                     this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");

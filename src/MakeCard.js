@@ -6,15 +6,6 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import DisplayResult from "./DisplayResult";
 
-let values = {
-    imgUrl: "",
-    imgName: "",
-    typeOfMeal: "",
-    madeFrom: "",
-    totalCalories: "",
-    data: [],
-    ref: ""
-}
 export class MakeCard extends Component {
     constructor(props) {
         super(props);
@@ -39,15 +30,6 @@ export class MakeCard extends Component {
             imgUrl: this.props.post.urls,
             imgName: this.props.post.meal
         })
-        values = {
-            imgUrl: this.props.post.urls,
-            imgName: this.props.post.meal,
-            typeOfMeal: this.props.post.typeOfMeal,
-            madeFrom: this.props.post.madeFrom,
-            totalCalories: this.props.post.totalCalories,
-            data: this.props.post.data,
-            ref: this.props.post.ref
-        }
     }
 
 
@@ -82,7 +64,9 @@ export class Hello extends MakeCard {
             typeOfMeal: "",
             madeFrom: "",
             totalCalories: "",
-            data: []
+            data: [],
+            fileName: "",
+            dataSnap: undefined
         }
     }
     componentDidMount() {
@@ -90,18 +74,20 @@ export class Hello extends MakeCard {
             if (user) {
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
-
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts/' + this.props.location.state.reference);
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.setState({
-                        imgUrl: snap.urls,
-                        imgName:snap.meal,
-                        typeOfMeal:snap.typeOfMeal,
-                        madeFrom:snap.madeFrom,
-                        totalCalories:snap.totalCalories,
-                        data:snap.data
-                    });
+                    if (snap !== null) {
+                        this.setState({
+                            imgUrl: snap.urls,
+                            imgName:snap.meal,
+                            typeOfMeal:snap.typeOfMeal,
+                            madeFrom:snap.madeFrom,
+                            totalCalories:snap.totalCalories,
+                            data:snap.data,
+                            fileName: snap.file
+                        });
+                    }
                 })
 
                 this.setState(
@@ -116,13 +102,16 @@ export class Hello extends MakeCard {
         this.authUnlisten();
     }
 
+    handleRemove2() {
+        //this.reference.remove();
+    }
     render() {
         return (
             <div>
                 <p>{this.state.imgName}</p>
                 <div>
                     <Link
-                        to={ROUTES.deleteConfirmation}
+                        to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference}}}
                     >
                         <button>Delete</button>
                     </Link>
@@ -144,19 +133,39 @@ export class DeletePost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ref: values.ref,
+            fileName: ""
         }
     }
 
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                this.props.location.state.reference.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    if (snap !== null) {
+                    this.setState({
+                        fileName: snap.file
+                    });
+                    }
+                })
                 this.setState(
                     {
                         uid: user.uid,
                     })
             }
         })
+    }
+    handleRemove() {
+        var storage = firebase.storage();
+        var storageRef = storage.ref();
+        var desertRef = storageRef.child('images/' + this.state.fileName);
+
+        //Delete the file
+        this.props.location.state.reference.remove().then(
+            desertRef.delete().then(function() {
+            }).catch(function(error) {
+            })
+        )
 
     }
 
@@ -166,7 +175,12 @@ export class DeletePost extends React.Component {
                 <CardBody>
                     <CardText>Do you want to delete this image?</CardText>
                     <button>No</button>
-                    <button>Yes</button>
+                    <Link
+                        to={{pathname: ROUTES.homePage}}
+                        onClick={() => this.handleRemove()}
+                    >
+                        <button>Yes</button>
+                    </Link>
                 </CardBody>
             </Card>
         )
