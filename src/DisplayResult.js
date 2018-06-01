@@ -69,7 +69,7 @@ export default class DisplayResult extends Component {
         return (
             <div>
                 <DisplayHeader/>
-                    <div className="card" style={cardStyle}>
+                <div className="container">
                     <p>{date}</p>
                     <p>{this.state.imgName}</p>
                     <p>{this.state.typeOfMeal}</p>
@@ -83,13 +83,15 @@ export default class DisplayResult extends Component {
                         </Link>
                     </div>
                     <img src={this.state.imgUrl} alt="food" />
-                    </div>
-                <p>colors</p>
-                {this.state.data.map((data, i) => <div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>
-                )}
-                <p>percentage</p>
-                {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent} %</p>)}
                 </div>
+                <div className="container">
+                    <p>colors</p>
+                    {this.state.data.map((data, i) => <div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>
+                    )}
+                    <p>percentage</p>
+                    {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent} %</p>)}
+                </div>
+            </div>
         )
     }
 
