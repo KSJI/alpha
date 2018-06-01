@@ -5,6 +5,7 @@ import { ROUTES } from "./constants";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import { DisplayHeader } from './DisplayHeader';
 
 
 
@@ -13,7 +14,7 @@ const divStyle = {
     height: "39px" //i changed the height had to
 };
 const cardStyle = {
-    width: "800px"
+    width: "75%"
 };
 
 
@@ -136,11 +137,50 @@ export default class DisplayAddNewPost extends React.Component {
                     break;
 
             }
+        }, () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                this.setState({ urls: downloadURL })
+                var request = require('request'),
+                    apiKey = 'acc_ed444d09ca5972e',
+                    apiSecret = '4244876bb30509de06e9cd4ed7c94396',
+                    imageUrl = downloadURL;
+
+                request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), (error, response, body) => {
+                    var data = JSON.parse(response.body);
+                    data = data.results[0].info.image_colors
+                    this.setState({ data: data });
+                    console.log(this.state);
+                    if (this.state.urls !== "") {
+                        this.props.history.push(ROUTES.homePage)
+                    }
+                    let email = this.state.email;
+                    var subEmail = email.substr(0, email.indexOf('@'));
+                    let time = firebase.database.ServerValue.TIMESTAMP;
+                    time = Date(time);
+                    let fileName = this.state.file;
+                    console.log(this.state.urls);
+                    let newData = {
+                        email: this.state.email,
+                        meal: this.state.meal,
+                        typeOfMeal: this.state.typeOfMeal,
+                        madeFrom: this.state.madeFrom,
+                        totalCalories: this.state.totalCalories,
+                        data: this.state.data,
+                        urls: this.state.urls,
+                        file: fileName.name,
+                        createdAt: time
+                    }
+                    this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
+                    // put together the data
+                    this.reference.push(newData);
+                }).auth(apiKey, apiSecret, true)
+            })
         })
-        this.addData(uploadTask);
     }
 
-    addData(uploadTask) {
+    /* addData(uploadTask) {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
@@ -176,7 +216,7 @@ export default class DisplayAddNewPost extends React.Component {
                 this.reference.push(newData);
             }).auth(apiKey, apiSecret, true)
         })
-    }
+    } */
 
     handleImageChange(e) {
         e.preventDefault();
