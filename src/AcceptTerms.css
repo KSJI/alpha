@@ -1,0 +1,28 @@
+.container {
+    border: 1px solid #ccc;
+    margin-top: 3%;
+    padding: 2%;
+    background-color: white;
+    margin-bottom: 2%;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.warning {
+    text-align: left;
+    width: 800px;
+    position: relative;
+    left: 95px;
+    top: 0px;
+    padding-bottom: 5px;
+    margin: 0px;
+}
+
+.accept {
+    position: relative;
+    left: 50px;
+    top: 0px;
+    margin-top: 2%;
+    margin-bottom: 0%;
+}

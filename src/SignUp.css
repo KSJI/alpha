@@ -1,19 +1,12 @@
 .container {
     border: 1px solid #ccc;
-    margin-top: 2.5%;
+    margin-top: 3%;
     padding: 2%;
     background-color: white;
     margin-bottom: 2%;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
-}
-
-h1 {
-    font-size: 48pt;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
-    text-align: center;
 }
 
 .form-control {
@@ -23,6 +16,7 @@ h1 {
 .form-group-one {
     padding-top: 0px;
     width: 800px;
+    left: 0px;
 }
 
 .form-group-two, .form-group-three, .form-group-four {
@@ -30,60 +24,68 @@ h1 {
     padding-bottom: 0px;
     padding-right: 0px;
     width: 800px;
+    left: 0px;
 }
 
 .form-group-five {
     padding-top: 2%;
-    padding-bottom: 12px;
+    padding-bottom: 2%;
     padding-right: 0px;
     width: 800px;
+    left: 0px;
 }
 
-input[type=text], input[type=number] {
+#name, #email, #weight, #username {
     padding: 7px;
     padding-right: 0px;
     border: 1px solid #ccc;
     box-sizing: border-box;
     float: left;
     position: relative;
-    
-
 }
 
-input[type=text], input[type=password] {
-    width: 288px;
-}
-
-input[type=number] {
-    width: 250px;
-}
 
 #name {
+    top: 0px;
     left: 80px;
+    width: 288px;
+    display: inline-block;
 }
 
 #email {
+    top: 0px;
     left: 113px;
+    width: 288px;
+    display: inline-block;
 }
 
 #weight {
+    top: 0px;
     left: 104px;
     margin: 10px;
+    width: 250px;
+    display: inline-block;
 }
 
 #username {
-    left: 78px;
+    top: 0px;
+    left: 79px;
+    width: 288px;
+    display: inline-block;
 }
 
 #password {
-    left: 0px;    
-}
+    top: 0px;
+    left: -1px; 
+    width: 288px;   
+    display: inline-block;
+    margin-bottom: 0%;  
+} 
 
 .label-one, .label-two, .label-three, .label-four, .label-five {
     padding-top: 15px;
     float: left;
     margin-left: 255px;
-    padding-right: 0px;
 }
 
 .form-group {
@@ -107,9 +109,10 @@ button {
     letter-spacing: -2px;
 }
 
-.lbs {
-    display: inline-block;
-    position: relative;
+.lb {
+    /* position: relative; */
     top: 60px;
-    left: -25px;
+    padding-top:7%;
+    margin-bottom:-2%;
+    left: -10px;
 }

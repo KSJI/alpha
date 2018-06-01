@@ -194,28 +194,33 @@ export default class DisplayEditAccountSettings extends Component {
                 <DisplayHeader />
                 <div className="settings">
                     <div className="email">
-                        <p className="text">Email</p>
+                        <label className="email-label" htmlFor="email">Email</label>
                         <input type="text"
+                            id="email"
                             placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input><i className="fas fa-pencil-alt"></i>
+                        </input><i id="icon-one" className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="password">
-                        <p className="text">Change Password</p>
+                        <label className="password-label" htmlFor="password">Change Password</label>
                         <input type="password"
+                            id="password-change"
                             name="newPassword"
                             placeholder="*******"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input><i className="fas fa-pencil-alt"></i>
+                        </input><i id="icon-two" className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="weight">
-                        <p className="text">Weight</p>
+                        <label className="weight-label" htmlFor="weight">Weight</label>
                         <input type="text"
+                            id="weight"
                             placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input> lbs <i className="fas fa-pencil-alt"></i>
+                        </input> 
+                        <p className="lbs"> lbs </p>
+                        <i id="icon-three" className="fas fa-pencil-alt"></i>
                     </div>
 
                     <div className="save">

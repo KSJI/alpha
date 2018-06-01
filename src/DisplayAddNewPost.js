@@ -21,7 +21,7 @@ export default class DisplayAddNewPost extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "kyle3381@gmail.com",
+            email: "",
             meal: "",
             file: "",
             imagePreviewUrl: "", //added
@@ -59,7 +59,6 @@ export default class DisplayAddNewPost extends React.Component {
         var file = this.state.file;
         var metadata = { contentType: 'image/png', };
         var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
-        //var downloaded = '';
         uploadTask.on('state_changed', function (snapshot) {
             // Observe state change events such as progress, pause, and resume
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -196,7 +195,7 @@ export default class DisplayAddNewPost extends React.Component {
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />)
+            $imagePreview = (<img alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
         }

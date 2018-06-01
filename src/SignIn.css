@@ -1,7 +1,7 @@
 .container {
-    border: 2px solid black;
-    margin-top: 5%;
-    padding: 3%;
+    border: 1px solid #ccc;
+    margin-top: 3%;
+    padding: 2%;
     background-color: white;
     margin-bottom: 2%;
     width: 75%;
@@ -9,27 +9,11 @@
     margin-right: auto;
 }
 
-h1 {
-    font-size: 36pt;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
-}
-
-.header {
-    border: 2px solid black;
-    margin-left: 15%;
-    margin-right:  15%;
-    margin-top: 2%;
-    padding: 1%;
-    background-color: white;
-    margin-bottom: 2%;
-    width: 75%;
-}
-
-.form-group {
-    padding-top: 3%;
-    margin-top: 25px;
-    width: 450px;
+.forgot-password {
+    position: relative;
+    left: -160px;
+    top: 0px;
+    padding-bottom: 5px;
 }
 
 .form-group-one {
@@ -41,6 +25,10 @@ h1 {
     padding-top: 10px;
 }
 
+.form-group-one, .form-group-two {
+    /* position: relative; */
+    left: 0px;
+}
 
 input[type=text], input[type=password] {
     padding: 7px;
@@ -52,7 +40,7 @@ input[type=text], input[type=password] {
 }
 
 #username {
-    left: 65px;
+    left: 60px;
 }
 
 #password {
@@ -60,37 +48,38 @@ input[type=text], input[type=password] {
 }
 
 .username-input, .password-input {
-    padding-right: 10px;
+    padding-top: 15px;
     float: left;
     margin-left: 254px;
 }
 
-.username-input {
-    padding-top: 16px;
+
+.form-group {
+    width: 450px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+    border: 1px solid #ccc;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 6px;
+    margin-bottom: 5px;
 }
 
-.password-input {
-    padding-top: 16px;
-}
-
-.button {
-    background-color: white; /* white */
-    color: white;
-    border-style: solid;
-    border-width: 1px;
-    padding: 5px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    
-}
-
-link {
-    font-size: 16px;
-    color: dodgerblue;
+button {
+    box-shadow: none;
+    border: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -2px;
 }
 
 .new-message {
     position: relative;
-    left: 150px;
+    left: 145px;
+    top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 5px;
 }
