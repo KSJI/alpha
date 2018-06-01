@@ -14,9 +14,7 @@ export class Homepage extends Component {
         return (
             <div>
                 <DisplayHeader />
-                <div className='container'>
                     <DisplayCards history={this.props.history}/>
-                </div>
             </div >
         )
     }

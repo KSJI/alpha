@@ -5,6 +5,7 @@ import { ROUTES } from "./constants";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import { DisplayHeader } from './DisplayHeader';
 
 
 
@@ -13,7 +14,7 @@ const divStyle = {
     height: "39px" //i changed the height had to
 };
 const cardStyle = {
-    width: "800px"
+    width: "75%"
 };
 
 
