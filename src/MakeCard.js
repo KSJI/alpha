@@ -55,7 +55,7 @@ export class MakeCard extends Component {
                 <Link
                     to={{ pathname: ROUTES.results, state: { reference: this.props.reference } }}
                 >
-                    <CardImg src={this.state.imgUrl} />
+                    <CardImg width="90%"src={this.state.imgUrl} />
                 </Link>
                 <CardBody>
                 </CardBody>
