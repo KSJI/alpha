@@ -14,14 +14,14 @@
     padding-bottom: 0px;
     padding-right: 15px;
     width:810px;
-    position: relative;
+    /* position: relative; */
     left: 16px;
 }
 
 .email {
     padding-top: 0px;
     width: 800px;
-    position: relative;
+    /* position: relative; */
     left: 0px;
 }
 
@@ -30,7 +30,7 @@
     padding-bottom: 2%;
     padding-right: 0px;
     width: 800px;
-    position: relative;
+    /* position: relative; */
     left: 0px;
 }
 
@@ -45,7 +45,7 @@
     padding-top: 15px;
     float: left;
     margin-left: 255px; 
-    position: relative;
+    /* position: relative; */
     left: -17px;
 }
 
@@ -69,7 +69,7 @@
 
 #email, #password-change, #weight {
     padding: 7px;
-    position: relative;
+    /* position: relative; */
 }
 
 #email {
@@ -115,4 +115,9 @@ button {
     position: relative;
     top: 0px;
     left: 15px;
+}
+
+.password-change, #icon-two {
+    display:inline;
+    margin-right:-4%;
 }
