@@ -1,5 +1,6 @@
 {
   "name": "alpha",
+  "homepage": "http://staff.washington.edu/kes97/info461/alpha/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
