@@ -5,6 +5,7 @@
 body {
   background-image:url("./imgs/BACKGROUND.png");
   text-align: center;
+  background-attachment:fixed;
 }
 
 .App-logo {

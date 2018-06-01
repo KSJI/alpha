@@ -58,7 +58,6 @@ export default class DisplayAddNewPost extends React.Component {
         var file = this.state.file;
         var metadata = { contentType: 'image/png', };
         var uploadTask = storageRef.child('images/' + file.name).put(file, metadata);
-        //var downloaded = '';
         uploadTask.on('state_changed', function (snapshot) {
             // Observe state change events such as progress, pause, and resume
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
@@ -149,7 +148,6 @@ export default class DisplayAddNewPost extends React.Component {
                 request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), (error, response, body) => {
                     var data = JSON.parse(response.body);
                     data = data.results[0].info.image_colors
-                    //console.log(data.results[0].info.image_colors);
                     this.setState({ data: data });
                     console.log(this.state);
                     if (this.state.urls !== "") {
@@ -178,7 +176,6 @@ export default class DisplayAddNewPost extends React.Component {
                 }).auth(apiKey, apiSecret, true)
             })
         })
-        //this.props.history.push(ROUTES.homePage);
 
     }
 
@@ -199,7 +196,7 @@ export default class DisplayAddNewPost extends React.Component {
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />)
+            $imagePreview = (<img alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
         }

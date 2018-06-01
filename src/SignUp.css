@@ -110,7 +110,7 @@ button {
 }
 
 .lb {
-    position: relative;
+    /* position: relative; */
     top: 60px;
     left: -10px;
 }
