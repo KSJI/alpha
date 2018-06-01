@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import {ROUTES} from "./constants";
 import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
@@ -28,12 +27,12 @@ export default class AcceptTerms extends React.Component {
 
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
-                this.state.subEmail = subEmail;
+                this.setState({subEmail:subEmail})
 
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.state.acceptTerms = snap;
+                    this.setState({acceptTerms : snap})
                 })
                 console.log(this.state.acceptTerms);
                 if (this.state.acceptTerms) {
@@ -49,7 +48,7 @@ export default class AcceptTerms extends React.Component {
     }
 
     handleCheck() {
-        this.state.checked = !this.state.checked;
+        this.setState({checked : !this.state.checked})
         console.log(this.state.checked);
     }
 

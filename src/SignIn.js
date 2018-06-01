@@ -20,12 +20,12 @@ export default class SignIn extends React.Component {
             if (user) {
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
-                this.state.subEmail = subEmail;
+                this.setState({subEmail:subEmail})
 
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.state.acceptTerms = snap;
+                    this.setState({acceptTerms:snap})
                 })
                 console.log(this.state.acceptTerms);
                 if (this.state.acceptTerms) {

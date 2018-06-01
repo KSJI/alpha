@@ -3,15 +3,10 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
-import DisplayResultCSS from "./DisplayResult.css"
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
 //import 'bootstrap/dist/css/bootstrap.min.css';
-
-const cardStyle = {
-    width: "75%"
-};
 
 export default class DisplayResult extends Component {
     constructor(props) {

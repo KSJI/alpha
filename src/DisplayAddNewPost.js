@@ -5,7 +5,6 @@ import { ROUTES } from "./constants";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
-import { DisplayHeader } from './DisplayHeader';
 
 
 
@@ -72,6 +71,9 @@ export default class DisplayAddNewPost extends React.Component {
                 case firebase.storage.TaskState.RUNNING: // or 'running'
                     console.log('Upload is running');
                     break;
+                default:
+                    console.log("Working");
+                    break;
             }
         }, function (error) {
             // Handle unsuccessful uploads
@@ -135,6 +137,8 @@ export default class DisplayAddNewPost extends React.Component {
                 case 'storage/server_wrong_file_size	':
                     // User canceled the upload
                     break;
+                default:
+                    console.log('no errors');
 
             }
         }, () => {

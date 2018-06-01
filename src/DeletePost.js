@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
-import { Card, CardTitle, CardText, CardImg, CardBody } from 'reactstrap';
+import { Card, CardText, CardBody } from 'reactstrap';
 import 'firebase/firestore';
-import DisplayResultCSS from "./DisplayResult.css"
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
 
 
-export default class DeletePost extends React.Component {
+export default class DeletePost extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,9 +41,9 @@ export default class DeletePost extends React.Component {
     }
 
     handleRemove() {
-        var storage = firebase.storage();
-        var storageRef = storage.ref();
-        var desertRef = storageRef.child('images/' + this.state.fileName);
+        // var storage = firebase.storage();
+        // var storageRef = storage.ref();
+        // var desertRef = storageRef.child('images/' + this.state.fileName);
 
         //Delete the file
         this.props.location.state.reference.remove();

@@ -4,7 +4,6 @@ import { Card, CardTitle, CardText, CardImg, CardBody } from 'reactstrap';
 import './MakeCard.css';
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
-import DisplayResult from "./DisplayResult";
 
 export class MakeCard extends Component {
     constructor(props) {
