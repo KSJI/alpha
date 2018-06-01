@@ -29,7 +29,6 @@ export class DisplayCards extends Component {
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Posts');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    // console.log(snap);
                     if (snap !== null) {
                         let revCards = [];
                         for (var i = Object.keys(snap).length - 1; i >= 0; i--) {
@@ -61,16 +60,8 @@ export class DisplayCards extends Component {
         */
         let cards = []
         this.state.cards.forEach((d, i) => {
-            cards.push(<MakeCard key={"post-" + i} post={Object.values(d)} reference={Object.keys(d)}/>)
+            cards.push(<MakeCard key={"post-" + i} post={Object.values(d)} reference={Object.keys(d)} />)
         })
-
-        // console.log(Object.values(this.state.cards));
-        // let cards = this.state.cards === null ? [] : Object.keys(this.state.cards).map((d) => {
-        //     // console.log(Object.values(this.state.cards[d]))
-        //     // return (
-        //     //     <MakeCard key={"post-" + d} post={this.state.cards[d]} reference={d}/>
-        //     // )
-        // })
 
         return (
             <div className="wrapper">

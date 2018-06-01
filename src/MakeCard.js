@@ -38,7 +38,7 @@ export class MakeCard extends Component {
             imgUrl: this.props.post[0].urls,
             imgName: this.props.post[0].meal
         })
-        
+
     }
 
 
@@ -87,11 +87,11 @@ export class Hello extends MakeCard {
                     let snap = snapshot.val();
                     this.setState({
                         imgUrl: snap.urls,
-                        imgName:snap.meal,
-                        typeOfMeal:snap.typeOfMeal,
-                        madeFrom:snap.madeFrom,
-                        totalCalories:snap.totalCalories,
-                        data:snap.data
+                        imgName: snap.meal,
+                        typeOfMeal: snap.typeOfMeal,
+                        madeFrom: snap.madeFrom,
+                        totalCalories: snap.totalCalories,
+                        data: snap.data
                     });
                 })
 
