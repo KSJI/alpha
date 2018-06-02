@@ -6,6 +6,7 @@ import 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
+import './DisplayResult.css'
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class DisplayResult extends Component {
@@ -62,33 +63,42 @@ export default class DisplayResult extends Component {
         date = date.split(" ");
         date = date[1] + " " + date[2] + ", " + date[3]
         let colors = this.state.data.map((data, i) => {
-            console.log(data);
-            return (<div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>)
+            return (<div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: "" + data.html_code }}></div></div>)
         })
 
         return (
             <div>
                 <DisplayHeader />
                 <div className="container">
-                    <p>{date}</p>
-                    <p>{this.state.imgName}</p>
-                    <p>{this.state.typeOfMeal}</p>
-                    <p>{this.state.madeFrom}</p>
-                    <p>{this.state.totalCalories}</p>
-                    <div>
-                        <Link
-                            to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}
-                        >
-                            <button>Delete</button>
-                        </Link>
+                    <div className="flex-container">
+                        <div classNsme="flex-direction">
+                            <p>{date}</p>
+                            <p>{this.state.imgName}</p>
+                            <p>{this.state.typeOfMeal}</p>
+                            <p>{this.state.madeFrom}</p>
+                            <p>{this.state.totalCalories}</p>
+                        </div>
+                        <div style={{justifyContent: "flex-end"}}>
+                            <Link
+                                to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}
+                            >
+                                <button>Delete</button>
+                            </Link>
+                        </div>
                     </div>
                     <img width="80%" src={this.state.imgUrl} alt="food" />
                 </div>
                 <div className="container">
-                    <p>colors</p>
-                    {colors}
-                    <p>percentage</p>
-                    {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent}%</p>)}
+                    <div className="flex-container">
+                        <div className="flex-direction">
+                        <p>colors</p>
+                        {colors}
+                        </div>
+                        <div className="flex-direction">
+                        <p>percentage</p>
+                        {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent}%</p>)}
+                        </div>
+                    </div>
                 </div>
             </div >
         )
