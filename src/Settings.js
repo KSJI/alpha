@@ -192,18 +192,18 @@ export default class DisplayEditAccountSettings extends Component {
         return (
             <div>
                 <DisplayHeader />
-                <div className="settings">
-                    <div className="email">
+                <div className="container">
+                    <div className="email-settings">
                         <label className="email-label" htmlFor="email">Email</label>
                         {/* <p className="text">Email</p> */}
                         <input type="text"
-                            id="email"
+                            id="email-input"
                             // placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-one" className="fas fa-pencil-alt"></i>
                     </div>
-                    <div className="password">
+                    <div className="password-settings">
                         <label className="password-label" htmlFor="password">Change Password</label>
                         {/* <p className="text">Change Password</p> */}
                         <input type="password"
@@ -213,16 +213,16 @@ export default class DisplayEditAccountSettings extends Component {
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-two" className="fas fa-pencil-alt"></i>
                     </div>
-                    <div className="weight">
+                    <div className="weight-settings">
                         <label className="weight-label" htmlFor="weight">Weight</label>
                         {/* <p className="text">Weight</p> */}
                         <input type="text"
-                            id="weight"
+                            id="weight-input"
                             // placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input> 
-                        <p className="lbs"> lbs </p>
+                        <p className="lb-settings"> lbs </p>
                         <i id="icon-three" className="fas fa-pencil-alt"></i>
                     </div>
 

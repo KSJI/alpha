@@ -1,85 +1,69 @@
-.container {
-    border: 1px solid #ccc;
-    margin-top: 3%;
-    padding: 2%;
+button {
     background-color: white;
+    border: none;
+    box-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -0.20%;
+}
+
+.container {
+    background-color: white;
+    border: 1px solid #ccc;
     margin-bottom: 2%;
-    width: 75%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 3%;
+    padding: 2%;
+    width: 75%;
+    
 }
 
 .forgot-password {
+    left: -16.75%;
+    padding-bottom: 0.75%;
     position: relative;
-    left: -160px;
-    top: 0px;
-    padding-bottom: 5px;
+    top: 0%;
 }
 
-.form-group-one {
-    padding-top: 5%;
-}
-
-.form-group-two {
-    padding-bottom: 35px;
-    padding-top: 10px;
-}
-
-.form-group-one, .form-group-two {
-    position: relative;
-    left: 0px;
-}
-
-input[type=text], input[type=password] {
-    padding: 7px;
+.form-group-signin {
     border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: 272px;
-    margin: 10px;
-    position: relative; 
-}
-
-#username {
-    left: 60px;
-}
-
-#password {
-    left: 5px;
-}
-
-.username-input, .password-input {
-    padding-top: 15px;
-    float: left;
-    margin-left: 254px;
-}
-
-
-.form-group {
-    width: 450px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 0px;
-    border: 1px solid #ccc;
-    margin-right: auto;
+    padding-bottom: 0.75%;
+    padding-right: 0%;
+    padding-top: 0.75%;
+    margin-bottom: 1%;
     margin-left: auto;
-    margin-top: 6px;
-    margin-bottom: 5px;
+    margin-right: auto;
+    margin-top: 1%;
+    width: 47%;
 }
 
-button {
-    box-shadow: none;
-    border: none;
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    letter-spacing: -2px;
+.form-group-one-signin, .form-group-two-signin {
+    width: 80%;
 }
 
 .new-message {
+    left: 15%;
+    margin-bottom: 0%;
+    padding-bottom: 0.30%;
+    padding-top: 0.75%;
     position: relative;
-    left: 145px;
-    top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    padding-top: 5px;
+    top: 0%;
+}
+
+#username-signin, #password-signin {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    left: 3.75%; 
+    padding: 1%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    position: relative; 
+    width: 34.5%;
+}
+
+.username-input, .password-input {
+    float: left;
+    margin-left: 33%;
+    padding-top: 2%;
 }

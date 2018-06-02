@@ -1,4 +1,13 @@
-.settings {
+button {
+    box-shadow: none;
+    border: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -0.20%;
+}
+
+.container {
     border: 1px solid #ccc;
     margin-top: 3%;
     padding: 2%;
@@ -9,110 +18,69 @@
     margin-right: auto;
 }
 
-.password {
+#email-input {
+    left: 6%;
+    width: 34.5%;
+}
+
+#email-input, #password-change, #weight-input{
+    padding: 1%;
+    position: relative;
+
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.email-label, .password-label, .weight-label {
     padding-top: 2%;
-    padding-bottom: 0px;
-    padding-right: 15px;
-    width:810px;
-    position: relative;
-    left: 16px;
-}
-
-.email {
-    padding-top: 0px;
-    width: 800px;
-    position: relative;
-    left: 0px;
-}
-
-.weight {
-    padding-top: 0%;
-    padding-bottom: 2%;
-    padding-right: 0px;
-    width: 800px;
-    position: relative;
-    left: 0px;
-}
-
-
-.email-label, .weight-label {
-    padding-top: 15px;
     float: left;
-    margin-left: 255px;   
+    margin-left: 33%;  
 }
 
-.password-label {
-    padding-top: 15px;
-    float: left;
-    margin-left: 255px; 
-    position: relative;
-    left: -17px;
+.email-settings, .password-settings, .weight-settings {
+    width: 80%;
+    
 }
 
 #icon-one {
     position: relative;
-    left: 28px;
-    top: 15px;
+    left: 8%;
+    top: 10%;
 }
 
 #icon-two {
     position: relative;
-    left: -8px;
-    top: 0px;
+    left: 2%;
 }
 
 #icon-three {
     position: relative;
-    left: 33px;
-    top: 0px;
+    left: 45%;
 }
 
-#email, #password-change, #weight {
-    padding: 7px;
-    position: relative;
-}
-
-#email {
-    width: 288px;
-    left: 113px;
-    top: 0px;
+.lb-settings {
+    margin-top: -4.5%;
+    margin-left: 81%;
+    margin-bottom: 1%;
 }
 
 #password-change {
-    width: 230px;
-    left: -15px;
-    top: 0px;
+    width: 34.5%; 
 }
-
-#weight {
-    width: 250px;
-    left: 103px;
-    top: 0px;
-}
-
 
 .save {
-    width: 450px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 0px;
+    width: 47%;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+    padding-right: 0%;
     border: 1px solid #ccc;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 5px;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
-button {
-    border: none;
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    letter-spacing: -2px;
-}
-
-.lbs {
-    display: inline-block;
-    position: relative;
-    top: 0px;
-    left: 15px;
+#weight-input {
+    left: 1.5%;
+    width: 29%;
 }
