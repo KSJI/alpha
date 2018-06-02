@@ -54,13 +54,8 @@ export default class SignIn extends React.Component {
             <div>
                 <DisplayHeader />
                 <div className="container">
-<<<<<<< HEAD
                     <div className="form-group-one-signin">
                         <label className="username-input" htmlFor="username">Username</label>
-=======
-                    <div className="form-group-one">
-                        <label className="username-input" htmlFor="email">Username</label>
->>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
                         <input type="text"
                             id="username-signin"
                             className="form-control"
@@ -79,13 +74,7 @@ export default class SignIn extends React.Component {
                             <p className='forgot-password-message'>Forgot Password?</p>
                         </Link>
                     </div>
-<<<<<<< HEAD
-                    
                     <div className="form-group-signin">
-=======
-
-                    <div className="form-group">
->>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
                         <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
                     </div>
                     <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>

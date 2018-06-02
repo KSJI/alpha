@@ -42,7 +42,6 @@ button {
     width: 80%;
 }
 
-<<<<<<< HEAD
 .new-message {
     left: 15%;
     margin-bottom: 0%;
@@ -50,35 +49,17 @@ button {
     padding-top: 0.75%;
     position: relative;
     top: 0%;
-=======
-.form-group-one, .form-group-two {
-    /* position: relative; */
-    left: 0px;
->>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
 }
 
 #username-signin, #password-signin {
     border: 1px solid #ccc;
     box-sizing: border-box;
-<<<<<<< HEAD
     left: 3.75%; 
     padding: 1%;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
     position: relative; 
     width: 34.5%;
-=======
-    width: 272px;
-    margin: 10px;
-}
-
-#username {
-    left: 60px;
-}
-
-#password {
-    left: 5px;
->>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
 }
 
 .username-input, .password-input {
