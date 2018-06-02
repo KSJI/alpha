@@ -18,7 +18,7 @@ export default class DisplayResult extends Component {
             madeFrom: "",
             totalCalories: "",
             data: [],
-            createdAt:"",
+            createdAt: "",
             fileName: "",
             dataSnap: undefined
         }
@@ -34,12 +34,12 @@ export default class DisplayResult extends Component {
                     if (snap !== null) {
                         this.setState({
                             imgUrl: snap.urls,
-                            imgName:snap.meal,
-                            typeOfMeal:snap.typeOfMeal,
-                            madeFrom:snap.madeFrom,
-                            totalCalories:snap.totalCalories,
+                            imgName: snap.meal,
+                            typeOfMeal: snap.typeOfMeal,
+                            madeFrom: snap.madeFrom,
+                            totalCalories: snap.totalCalories,
                             createdAt: snap.createdAt,
-                            data:snap.data,
+                            data: snap.data,
                             fileName: snap.file
                         });
                     }
@@ -61,9 +61,14 @@ export default class DisplayResult extends Component {
         let date = this.state.createdAt;
         date = date.split(" ");
         date = date[1] + " " + date[2] + ", " + date[3]
+        let colors = this.state.data.map((data, i) => {
+            console.log(data);
+            return (<div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>)
+        })
+
         return (
             <div>
-                <DisplayHeader/>
+                <DisplayHeader />
                 <div className="container">
                     <p>{date}</p>
                     <p>{this.state.imgName}</p>
@@ -72,21 +77,20 @@ export default class DisplayResult extends Component {
                     <p>{this.state.totalCalories}</p>
                     <div>
                         <Link
-                            to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference}}}
+                            to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}
                         >
                             <button>Delete</button>
                         </Link>
                     </div>
-                    <img src={this.state.imgUrl} alt="food" />
+                    <img width="80%" src={this.state.imgUrl} alt="food" />
                 </div>
                 <div className="container">
                     <p>colors</p>
-                    {this.state.data.map((data, i) => <div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>
-                    )}
+                    {colors}
                     <p>percentage</p>
-                    {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent} %</p>)}
+                    {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent}%</p>)}
                 </div>
-            </div>
+            </div >
         )
     }
 
