@@ -79,10 +79,8 @@ export default class DisplayResult extends Component {
                             <p>{this.state.totalCalories}</p>
                         </div>
                         <div style={{justifyContent: "flex-end"}}>
-                            <Link
-                                to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}
-                            >
-                                <button>Delete</button>
+                            <Link to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}>
+                                <i className="fas fa-trash-alt"></i>
                             </Link>
                         </div>
                     </div>
