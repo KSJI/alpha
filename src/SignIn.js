@@ -18,35 +18,52 @@ export default class SignIn extends React.Component {
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.history.push({ state: { pwd: this.state.password }, pathname: ROUTES.homePage });
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+                this.setState({subEmail:subEmail})
+
+                this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
+                this.reference.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({acceptTerms:snap})
+                })
+                console.log(this.state.acceptTerms);
+                if (this.state.acceptTerms) {
+                    this.props.history.push(ROUTES.homePage);
+                } else {
+                    this.props.history.push(ROUTES.acceptTerms);
+                }
             }
         });
 
     }
 
     componentWillUnmount() {
-
-        // this.authUnlisten();
+        this.authUnlisten();
     }
 
     handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then(() => this.props.history.push({ state: { pwd: this.state.password }, pathname: ROUTES.acceptTerms }))
+            .then(() => this.props.history.push(ROUTES.acceptTerms))
             .catch(err => this.setState({ fberror: err }))
     }
+
     render() {
         return (
 
             <div>
                 <DisplayHeader />
                 <div className="container">
+<<<<<<< HEAD
                     <div className="form-group-one-signin">
                         <label className="username-input" htmlFor="username">Username</label>
+=======
+                    <div className="form-group-one">
+                        <label className="username-input" htmlFor="email">Username</label>
+>>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
                         <input type="text"
                             id="username-signin"
                             className="form-control"
-                            //placeholder="your email address"
-                            required
                             onInput={evt => this.setState({ email: evt.target.value })} />
                     </div>
                     <div className="form-group-two-signin">
@@ -54,7 +71,6 @@ export default class SignIn extends React.Component {
                         <input type="password"
                             id="password-signin"
                             className="form-control"
-                            //placeholder="your password"
                             minLength="6"
                             onInput={evt => this.setState({ password: evt.target.value })} />
                     </div>
@@ -63,8 +79,13 @@ export default class SignIn extends React.Component {
                             <p className='forgot-password-message'>Forgot Password?</p>
                         </Link>
                     </div>
+<<<<<<< HEAD
                     
                     <div className="form-group-signin">
+=======
+
+                    <div className="form-group">
+>>>>>>> 632bde6156dd38a257abf397e077a992dbbf0df5
                         <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
                     </div>
                     <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>

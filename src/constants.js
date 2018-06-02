@@ -5,7 +5,7 @@ export const ROUTES = {
     acceptTerms: "/acceptterms",
     results: "/results",
     newPost: "/newpost",
-    deleteConfirmation: "deleteconfirmation",
+    deleteConfirmation: "/deleteconfirmation",
     displayEditAccountSettings: "/settings",
     forgotPassword: "/forgotPassword",
     displayAddNewPost: "/newPost"

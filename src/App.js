@@ -9,6 +9,8 @@ import ForgotPassword from "./ForgotPassword";
 import './App.css';
 import { Homepage } from './Homepage';
 import DisplayAddNewPost from './DisplayAddNewPost';
+import DeletePost from "./DeletePost";
+import DisplayResult from "./DisplayResult"
 
 
 class App extends Component {
@@ -22,6 +24,8 @@ class App extends Component {
                     <Route path={ROUTES.homePage} component={Homepage} />
                     <Route path={ROUTES.displayEditAccountSettings} component={DisplayEditAccountSettings} />
                     <Route path={ROUTES.newPost} component={DisplayAddNewPost} />
+                    <Route path={ROUTES.results} component={DisplayResult} />
+                    <Route path={ROUTES.deleteConfirmation} component={DeletePost}/>
                     <Route path={ROUTES.forgotPassword} component={ForgotPassword} />
                     <Route path={ROUTES.displayAddNewPost} component={DisplayAddNewPost} />
                     <Redirect to={ROUTES.signIn} />

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ROUTES } from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
@@ -58,7 +57,7 @@ export default class SignUp extends React.Component {
                     displayName: this.state.displayName,
                 }))
                 .then(this.handleAdd())
-                .then(this.props.history.push(ROUTES.acceptTerms, {pwd:this.state.password}))
+                .then(this.props.history.push(ROUTES.acceptTerms))
                 .catch(err => this.setState({ fberror: err }))
         }
     }
@@ -74,7 +73,7 @@ export default class SignUp extends React.Component {
                 Username: this.state.userName,
                 Email: this.state.email,
                 Weight: this.state.weight,
-                AcceptTerms: 'false'
+                AcceptTerms: false
             },
             createdAt: time,
         }

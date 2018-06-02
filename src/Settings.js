@@ -195,7 +195,6 @@ export default class DisplayEditAccountSettings extends Component {
                 <div className="container">
                     <div className="email-settings">
                         <label className="email-label" htmlFor="email">Email</label>
-                        {/* <p className="text">Email</p> */}
                         <input type="text"
                             id="email-input"
                             // placeholder={this.state.email}
@@ -205,17 +204,15 @@ export default class DisplayEditAccountSettings extends Component {
                     </div>
                     <div className="password-settings">
                         <label className="password-label" htmlFor="password">Change Password</label>
-                        {/* <p className="text">Change Password</p> */}
                         <input type="password"
                             id="password-change"
                             name="newPassword"
-                            // placeholder="*******"
+                            placeholder="*******"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-two" className="fas fa-pencil-alt"></i>
                     </div>
                     <div className="weight-settings">
                         <label className="weight-label" htmlFor="weight">Weight</label>
-                        {/* <p className="text">Weight</p> */}
                         <input type="text"
                             id="weight-input"
                             // placeholder={this.state.weight}
