@@ -1,22 +1,49 @@
+button {
+    box-shadow: none;
+    border: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -0.20%;
+}
+
+.cards-col {
+    float:left;
+    position: relative;
+    right:2%;
+    width:83%;
+    margin: 1.5%;
+}
+
+.settings-col1 {
+    width:20%;
+    position: absolute;
+    right: 10.5%;
+    background-color: white;
+    border:1px solid #ccc;
+    margin-bottom:1%;
+    bottom: 29%;
+    padding: 1%;
+}
+
+
+.settings-col2 {
+    width:20%;
+    position: absolute;
+    right: 10.5%;
+    background-color: white;
+    border:1px solid #ccc;
+    margin-bottom:1%;
+    bottom: 8%;
+    padding: 1%;
+}
+
+.signoutbutton {
+    border:1px solid #ccc;
+}
+
 .wrapper {
     width:75%;
     margin-left:12%;
     margin-right:12%;
 }
-.cards-col {
-    float:left;
-    position: relative;
-    right:2%;
-    width:85%;
-}
-
-.settings-col {
-    width:14%;
-    position: relative;
-    left: 3.5%;
-    float:right;
-    background-color: white;
-    border:1px solid black;
-    margin-bottom:2%;
-}
-

@@ -197,7 +197,7 @@ export default class DisplayEditAccountSettings extends Component {
                         <label className="email-label" htmlFor="email">Email</label>
                         <input type="text"
                             id="email-input"
-                            // placeholder={this.state.email}
+                            placeholder={this.state.email}
                             name="newEmail"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input><i id="icon-one" className="fas fa-pencil-alt"></i>
@@ -215,7 +215,7 @@ export default class DisplayEditAccountSettings extends Component {
                         <label className="weight-label" htmlFor="weight">Weight</label>
                         <input type="text"
                             id="weight-input"
-                            // placeholder={this.state.weight}
+                            placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
                         </input> 

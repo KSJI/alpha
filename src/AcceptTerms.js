@@ -79,7 +79,7 @@ export default class AcceptTerms extends React.Component {
 		                <input type="checkbox" onClick={() => this.handleCheck()} id="checkbox-2-1" className="regular-checkbox big-checkbox" />
                     <p className='accept'> I accept the terms and conditions of this warning </p>
                     <div className='button-accept'>
-                        <button type="submit" onClick={() => this.handleContinue()} className="btn btn-primary">Continue</button>
+                        <button type="submit" onClick={() => this.handleContinue()} className="btn btn-primary">CONTINUE</button>
                     </div>
                 </div>
             </div>
