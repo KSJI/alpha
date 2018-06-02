@@ -21,6 +21,7 @@ export default class DisplayResult extends Component {
             data: [],
             createdAt: "",
             fileName: "",
+            key: "",
             dataSnap: undefined
         }
     }
@@ -49,6 +50,7 @@ export default class DisplayResult extends Component {
                 this.setState(
                     {
                         uid: user.uid,
+                        key: this.props.location.state.reference
                     })
             }
         })
@@ -65,28 +67,29 @@ export default class DisplayResult extends Component {
         let colors = this.state.data.map((data, i) => {
             return (<div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: "" + data.html_code }}></div></div>)
         })
-
+        let name = this.state.imgName;
+        let imgNameCase = name.charAt(0).toUpperCase() + name.substr(1);
         return (
             <div>
                 <DisplayHeader />
                 <div className="container">
-                    <div className="flex-container">
-                        <div classNsme="flex-direction">
+                    <div className="flex-space" style={{textAlign:"left"}}>
+                        <div className="flex-direction">
                             <p>{date}</p>
-                            <p>{this.state.imgName}</p>
-                            <p>{this.state.typeOfMeal}</p>
-                            <p>{this.state.madeFrom}</p>
-                            <p>{this.state.totalCalories}</p>
+                            <p>{imgNameCase}</p>
+                            {this.state.typeOfMeal !== "" ? <p>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
+                            {this.state.madeFrom !== "" ? <p>Made From: {this.state.madeFrom}</p> : undefined}
+                            {this.state.totalCalories !== "" ? <p>Total Calories: {this.state.totalCalories}</p> : undefined}
                         </div>
                         <div style={{justifyContent: "flex-end"}}>
                             <Link
-                                to={{ pathname: ROUTES.deleteConfirmation, state: { reference: this.reference } }}
+                                to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference, key: this.state.key} }}
                             >
-                                <button>Delete</button>
+                                <button className="fa fa-trash" style={{height: "30%", color:"black"}}></button>
                             </Link>
                         </div>
                     </div>
-                    <img width="80%" src={this.state.imgUrl} alt="food" />
+                    <img width="70%" src={this.state.imgUrl} alt="food" />
                 </div>
                 <div className="container">
                     <div className="flex-container">
