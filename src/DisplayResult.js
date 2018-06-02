@@ -74,18 +74,18 @@ export default class DisplayResult extends Component {
                 <DisplayHeader />
                 <div className="container">
                     <div className="flex-space" style={{textAlign:"left"}}>
-                        <div className="flex-direction">
-                            <p>{date}</p>
-                            <p>{imgNameCase}</p>
-                            {this.state.typeOfMeal !== "" ? <p>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
+                        <div className="flex-direction-top">
+                            <p className='date'>{date}</p>
+                            <p className='name'>{imgNameCase}</p>
+                            {/* {this.state.typeOfMeal !== "" ? <p>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
                             {this.state.madeFrom !== "" ? <p>Made From: {this.state.madeFrom}</p> : undefined}
-                            {this.state.totalCalories !== "" ? <p>Total Calories: {this.state.totalCalories}</p> : undefined}
+                            {this.state.totalCalories !== "" ? <p>Total Calories: {this.state.totalCalories}</p> : undefined} */}
                         </div>
                         <div style={{justifyContent: "flex-end"}}>
                             <Link
                                 to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference, key: this.state.key} }}
                             >
-                                <button className="fa fa-trash" style={{height: "30%", color:"black"}}></button>
+                                <button className="fa fa-trash" style={{height: "50%", width: "10%", float: "right", color:"black"}}></button>
                             </Link>
                         </div>
                     </div>
@@ -93,13 +93,19 @@ export default class DisplayResult extends Component {
                 </div>
                 <div className="container">
                     <div className="flex-container">
+                    <p className="color-analysis-label">Color Analysis</p>
                         <div className="flex-direction">
-                        <p>colors</p>
+                        <p className='color-label'>Color</p>
                         {colors}
                         </div>
                         <div className="flex-direction">
-                        <p>percentage</p>
+                        <p className='percentage-label'>Percentage</p>
                         {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent}%</p>)}
+                        </div>
+                        <div className="flex-direction">
+                            {this.state.typeOfMeal !== "" ? <p className='meal-label'>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
+                            {this.state.madeFrom !== "" ? <p className='made-label'>Made From: {this.state.madeFrom}</p> : undefined}
+                            {this.state.totalCalories !== "" ? <p className='calories-label'>Total Calories: {this.state.totalCalories}</p> : undefined}
                         </div>
                     </div>
                 </div>

@@ -22,10 +22,11 @@ button {
     background-color: white;
     border:1px solid #ccc;
     margin-bottom:1%;
+    margin-right: auto;
+    margin-left: auto;
     top: 32%;
     padding: 1%;
 }
-
 
 .settings-col2 {
     width:20%;
@@ -34,12 +35,18 @@ button {
     background-color: white;
     border:1px solid #ccc;
     margin-bottom:1%;
+    margin-right: auto;
+    margin-left: auto;
     top: 45%;
-    padding: 1%;
+    padding-right: 1%;
+    padding-left: 1%;
+    padding-top: 1.25%;
+    padding-bottom: 1.25%;
 }
 
 .signoutbutton {
     border:1px solid #ccc;
+    padding: 1.5%;
 }
 
 .wrapper {

@@ -70,7 +70,7 @@ export class DisplayCards extends Component {
                 </Col>
                 <Router>
                     <Col className="settings-col1">
-                        <Link to="/Settings" style={{ color: 'black' }}><i className="fas fa-cog fa-lg"></i></Link>{" "}
+                        <Link to="/Settings" style={{ color: 'black', padding: "5%"}}><i className="fas fa-cog fa-lg"></i></Link>{" "}
                         <button type="button" className="signoutbutton" onClick={() => {
                             firebase.auth().signOut()
                                 .then(this.props.history.push(ROUTES.signIn));

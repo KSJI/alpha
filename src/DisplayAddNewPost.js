@@ -254,77 +254,81 @@ export default class DisplayAddNewPost extends React.Component {
         }
         return (
             <div>
-            <DisplayHeader/>
-            <div className="container">
-                    <div>
-                        <p className="flex-start">{today}</p>
-                        <div className="input-group">
-                            <div className="flex-start">
-                                <p>meal: </p>
-                                <input type="text" style={divStyle}
-                                    className="form-control"
-                                    value={this.state.meal}
-                                    onInput={evt => this.setState({
-                                        meal: evt.target.value
-                                    })}
-                                    placeholder="type here"
-                                />
-                            </div>
-                            <div className="PreviewComponenet">
-                                <div className="imgPreview">  {$imagePreview}
-                                </div>
+                <DisplayHeader/>
+                <div className="container">
+                        <div>
+                            <p className="flex-start-date">{today}</p>
+                            <div className="input-group">
                                 <div className="flex-start">
-                                    <p>File to upload: </p>
-                                    <input type="file" style={divStyle}
-                                        className="form-control"
-                                        onChange={evt => this.handleImageChange(evt)}
+                                    <p>Meal: </p>
+                                    <input type="text" style={divStyle}
+                                        className="meal-form-control"
+                                        value={this.state.meal}
+                                        onInput={evt => this.setState({
+                                            meal: evt.target.value
+                                        })}
+                                        // placeholder="type here"
                                     />
                                 </div>
-                            </div>
-                            <p className="flex-start">Food Information</p>
-                            <div style={{paddingLeft: "4%"}}>
-                                <div className="flex-start">
-                                    <p>Type of Meal: </p>
-                                    <input type="text" style={divStyle}
-                                        className="form-control"
-                                        value={this.state.typeOfMeal}
-                                        onInput={evt => this.setState({
-                                            typeOfMeal: evt.target.value
-                                        })}
-                                    />
-                                    <p>*optional*</p>
+                                <div className="PreviewComponenet">
+                                    <div className="imgPreview">  {$imagePreview}
+                                    </div>
+                                    <div className="flex-start-file">
+                                        <p>File to upload: </p>
+                                        <input type="file" style={divStyle}
+                                            className="form-control-upload"
+                                            onChange={evt => this.handleImageChange(evt)}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex-start">
-                                    <p>Made From: </p>
-                                    <input type="text" style={divStyle}
-                                        className="form-control"
-                                        value={this.state.madeFrom}
-                                        onInput={evt => this.setState({
-                                            madeFrom: evt.target.value
-                                        })}
+                                <p className="flex-start">Food Information</p>
+                                <div style={{paddingLeft: "4%"}}>
+                                    <div className="flex-start">
+                                        <p>Type of Meal:</p>
+                                        <input type="text" style={divStyle}
+                                            className="form-control-meal"
+                                            value={this.state.typeOfMeal}
+                                            onInput={evt => this.setState({
+                                                typeOfMeal: evt.target.value
+                                            })}
+                                        />
+                                        <p className='optional'>*optional*</p>
+                                    </div>
+                                    <div className="flex-start">
+                                        <p>Made From:</p>
+                                        <input type="text" style={divStyle}
+                                            className="form-control-made"
+                                            value={this.state.madeFrom}
+                                            onInput={evt => this.setState({
+                                                madeFrom: evt.target.value
+                                            })}
 
-                                    />
-                                    <p>*optional*</p>
-                                </div>
-                                <div className="flex-start">
-                                    <p>Total Calories: </p>
-                                    <input type="text" style={divStyle}
-                                        className="form-control"
-                                        value={this.state.totalCalories}
-                                        onInput={evt => this.setState({
-                                            totalCalories: evt.target.value
-                                        })}
-                                    />
-                                    <p>*optional*</p>
+                                        />
+                                        <p className='optional'>*optional*</p>
+                                    </div>
+                                    <div className="flex-start">
+                                        <p>Total Calories: </p>
+                                        <input type="text" style={divStyle}
+                                            className="form-control-calories"
+                                            value={this.state.totalCalories}
+                                            onInput={evt => this.setState({
+                                                totalCalories: evt.target.value
+                                            })}
+                                        />
+                                        <p className='optional'>*optional*</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <Link to={ROUTES.homePage}><button type="button">Cancel</button></Link>
-                        <button type="button" onClick={evt => this.handleSubmit(evt)}>Submit</button>
-                    </div>
-            </div>
+                        <div className='two-buttons'>
+                            <div className='cancelButton'>
+                                <Link to={ROUTES.homePage}><button type="button">CANCEL</button></Link>
+                            </div>
+                            <div className='submitButton'>
+                                <button type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
+                            </div>
+                        </div>
+                </div>
             </div>
         )
     }

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
 import './DisplayResult.css'
+import './DeletePost.css'
 
 export default class DeletePost extends Component {
     constructor(props) {
@@ -59,18 +60,22 @@ export default class DeletePost extends Component {
             <DisplayHeader/>
             <Card className="container">
                 <CardBody>
-                    <CardText>Are you sure you would like delete this post?</CardText>
+                    <CardText className="question">Are you sure you would like delete this post?</CardText>
                     <img width="70%" src={this.state.imgUrl} alt="food" />
                     <Link
                     to={{ pathname: ROUTES.results, state: {reference: this.state.reference}}}
                     >
-                    <button>Cancel</button>
+                    <div className='cancelButton'>
+                        <button>CANCEL</button>
+                    </div>
                     </Link>
                     <Link
                         to={{pathname: ROUTES.homePage}}
                         onClick={() => this.handleRemove()}
                     >
-                        <button>Yes</button>
+                    <div className='submitButton-delete'>
+                        <button>YES</button>
+                    </div>
                     </Link>
                 </CardBody>
             </Card>
