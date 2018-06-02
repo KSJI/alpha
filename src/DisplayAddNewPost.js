@@ -5,6 +5,8 @@ import { ROUTES } from "./constants";
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
+import { DisplayHeader } from './DisplayHeader';
+import './DisplayAddNewPost.css'
 
 
 
@@ -12,9 +14,7 @@ const divStyle = {
     width: "239px",
     height: "39px" //i changed the height had to
 };
-const cardStyle = {
-    width: "75%"
-};
+
 
 
 export default class DisplayAddNewPost extends React.Component {
@@ -236,19 +236,30 @@ export default class DisplayAddNewPost extends React.Component {
     }
 
     render() {
+        //new date source code from w3resource
+        var today = new Date();
+        var dd = today. getDate();
+        var mm = today.getMonth();
+        var month = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var yyyy = today.getFullYear();
+
+        today = month[mm] +' '+dd + ', ' + yyyy;
+        console.log(today);
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img alt="preview of what is being displayed" src={imagePreviewUrl} />)
+            $imagePreview = (<img className="imgPreview.img"alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
         }
         return (
-            <div className="d-flex justify-content-center p-5">
-                <div className="card d-flex justify-content-center" style={cardStyle}>
-                    <div className="card-body">
-                        <div className="input-group pb-3 d-flex flex-column">
-                            <div className="d-flex">
+            <div>
+            <DisplayHeader/>
+            <div className="container">
+                    <div>
+                        <p className="flex-start">{today}</p>
+                        <div className="input-group">
+                            <div className="flex-start">
                                 <p>meal: </p>
                                 <input type="text" style={divStyle}
                                     className="form-control"
@@ -262,7 +273,7 @@ export default class DisplayAddNewPost extends React.Component {
                             <div className="PreviewComponenet">
                                 <div className="imgPreview">  {$imagePreview}
                                 </div>
-                                <div className="d-flex">
+                                <div className="flex-start">
                                     <p>File to upload: </p>
                                     <input type="file" style={divStyle}
                                         className="form-control"
@@ -270,49 +281,50 @@ export default class DisplayAddNewPost extends React.Component {
                                     />
                                 </div>
                             </div>
-                            <p>Food Information</p>
-                            <div className="d-flex">
-                                <p>Type of Meal: </p>
-                                <input type="text" style={divStyle}
-                                    className="form-control"
-                                    value={this.state.typeOfMeal}
-                                    onInput={evt => this.setState({
-                                        typeOfMeal: evt.target.value
-                                    })}
-                                    placeholder="type here"
-                                />
-                                <p className="ml-2">*optional*</p>
-                            </div>
-                            <div className="d-flex">
-                                <p>Made From: </p>
-                                <input type="text" style={divStyle}
-                                    className="form-control"
-                                    value={this.state.madeFrom}
-                                    onInput={evt => this.setState({
-                                        madeFrom: evt.target.value
-                                    })}
-                                    placeholder="type here"
-                                />
-                            </div>
-                            <div className="d-flex">
-                                <p>Total Calories: </p>
-                                <input type="text" style={divStyle}
-                                    className="form-control"
-                                    value={this.state.totalCalories}
-                                    onInput={evt => this.setState({
-                                        totalCalories: evt.target.value
-                                    })}
-                                    placeholder="type here"
-                                />
-                                <p className="ml-2">*optional*</p>
+                            <p className="flex-start">Food Information</p>
+                            <div style={{paddingLeft: "4%"}}>
+                                <div className="flex-start">
+                                    <p>Type of Meal: </p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control"
+                                        value={this.state.typeOfMeal}
+                                        onInput={evt => this.setState({
+                                            typeOfMeal: evt.target.value
+                                        })}
+                                    />
+                                    <p>*optional*</p>
+                                </div>
+                                <div className="flex-start">
+                                    <p>Made From: </p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control"
+                                        value={this.state.madeFrom}
+                                        onInput={evt => this.setState({
+                                            madeFrom: evt.target.value
+                                        })}
+
+                                    />
+                                    <p>*optional*</p>
+                                </div>
+                                <div className="flex-start">
+                                    <p>Total Calories: </p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control"
+                                        value={this.state.totalCalories}
+                                        onInput={evt => this.setState({
+                                            totalCalories: evt.target.value
+                                        })}
+                                    />
+                                    <p>*optional*</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex">
+                    <div>
                         <Link to={ROUTES.homePage}><button type="button">Cancel</button></Link>
                         <button type="button" onClick={evt => this.handleSubmit(evt)}>Submit</button>
                     </div>
-                </div>
+            </div>
             </div>
         )
     }

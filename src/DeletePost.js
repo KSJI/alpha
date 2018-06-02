@@ -7,13 +7,15 @@ import 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
-
+import './DisplayResult.css'
 
 export default class DeletePost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fileName: ""
+            fileName: "",
+            reference: "",
+            imgUrl: ""
         }
     }
 
@@ -24,13 +26,15 @@ export default class DeletePost extends Component {
                     let snap = snapshot.val();
                     if (snap !== null) {
                     this.setState({
-                        fileName: snap.file
+                        fileName: snap.file,
+                        imgUrl: snap.urls
                     });
                     }
                 })
                 this.setState(
                     {
                         uid: user.uid,
+                        reference: this.props.location.state.key
                     })
             }
         })
@@ -53,10 +57,15 @@ export default class DeletePost extends Component {
         return (
             <div>
             <DisplayHeader/>
-            <Card className="card">
+            <Card className="container">
                 <CardBody>
-                    <CardText>Do you want to delete this image?</CardText>
-                    <button>No</button>
+                    <CardText>Are you sure you would like delete this post?</CardText>
+                    <img width="70%" src={this.state.imgUrl} alt="food" />
+                    <Link
+                    to={{ pathname: ROUTES.results, state: {reference: this.state.reference}}}
+                    >
+                    <button>Cancel</button>
+                    </Link>
                     <Link
                         to={{pathname: ROUTES.homePage}}
                         onClick={() => this.handleRemove()}

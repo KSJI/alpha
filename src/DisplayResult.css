@@ -25,8 +25,13 @@
 .flex-container {
     display: flex;
     justify-content: center;
-    padding: 2%;
 }
+
+.flex-space {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .flex-direction {
     flex-direction: column;
@@ -35,4 +40,5 @@
 
 .delete-button {
     left:20%;
+    padding: 1%;
 }
