@@ -55,13 +55,14 @@ button {
 
 #icon-three {
     position: relative;
-    left: 45%;
+    left: 25.5%;
+    margin-bottom:5%;
 }
 
 .lb-settings {
     margin-top: -4.5%;
     margin-left: 81%;
-    margin-bottom: 1%;
+    margin-bottom: -2.5%;
 }
 
 #password-change {
