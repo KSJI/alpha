@@ -92,7 +92,6 @@ export default class SignUp extends React.Component {
                                 id='name-signup'
                                 className='form-control'
                                 required
-                                // placeholder='Your Full Name'
                                 onInput={evt => this.setState({fullName: evt.target.value})}/>
                     </div>
                     <div className="form-group-two-signup">
@@ -100,7 +99,6 @@ export default class SignUp extends React.Component {
                             <input type="text"
                                 id="email-signup"
                                 className="form-control"
-                                // placeholder="your email address"
                                 required
                                 onInput={evt => this.setState({email: evt.target.value})}/>
                     </div>
@@ -111,7 +109,6 @@ export default class SignUp extends React.Component {
                                 className='form-control'
                                 required
                                 step='.01'
-                                // placeholder=''
                                 onInput={evt => this.setState({weight: evt.target.value})}/>
                         <p className="lb-signup"> lbs </p>
                     </div>
@@ -121,7 +118,6 @@ export default class SignUp extends React.Component {
                                 id='username-signup'
                                 className='form-control'
                                 required
-                                // placeholder='Your Username'
                                 onInput={evt => this.setState({userName: evt.target.value})}/>
                     </div>
                     <div className="form-group-five-signup">
@@ -129,7 +125,6 @@ export default class SignUp extends React.Component {
                             <input type="password"
                                 id="password-signup"
                                 className="form-control"
-                                // placeholder="your password"
                                 minLength="6"
                                 onInput={evt => this.setState({password: evt.target.value})}/>
                     </div>

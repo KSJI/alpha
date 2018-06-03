@@ -30,18 +30,12 @@ export default class AcceptTerms extends React.Component {
                     if (this.state.acceptTerms) {
                         this.props.history.push(ROUTES.homePage);
                     }
-
                 })
-
                 this.setState({
                     email: user.email,
                     weight: user.weight,
                     username: user.username,
-                })
-
-
-                
-               
+                })   
             }
         })
     }
@@ -52,11 +46,9 @@ export default class AcceptTerms extends React.Component {
 
     handleCheck() {
         this.setState({checked : !this.state.checked})
-        console.log(this.state.checked);
     }
 
     handleContinue() {
-        console.log(this.state.checked);
         if (this.state.checked) {
             this.reference = firebase.database().ref('Profile/' + this.state.subEmail + '/Author/AcceptTerms');
             this.reference.update({
