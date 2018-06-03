@@ -1,3 +1,12 @@
+button {
+    box-shadow: none;
+    border: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    letter-spacing: -0.20%;
+}
+
 .container {
     border: 1px solid #ccc;
     margin-top: 3%;
@@ -9,110 +18,86 @@
     margin-right: auto;
 }
 
-.form-control {
-    margin-left: 5px;
+#email-signup {
+    left: 14.25%;
+    width: 34.5%;
 }
 
-.form-group-one {
-    padding-top: 0px;
-    width: 800px;
-    left: 0px;
+.form-group-signup {
+    width: 47%;
+    padding-top: 0.75%;
+    padding-bottom: 0.75%;
+    border: 1px solid #ccc;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 8.5%;
+    margin-bottom: 1%;
 }
 
-.form-group-two, .form-group-three, .form-group-four {
-    padding-top: 2%;
-    padding-bottom: 0px;
-    padding-right: 0px;
-    width: 800px;
-    left: 0px;
+.form-group-one-signup {
+    padding-top: 0%;
+    width: 80%;
+    left: 0%;
 }
 
-.form-group-five {
+.form-group-two-signup, .form-group-three-signup, .form-group-four-signup {
+    padding-top: 1%;
+    padding-bottom: 0%;
+    padding-right: 0%;
+    width: 80%;
+    left: 0%;
+}
+
+.form-group-five-signup {
     padding-top: 2%;
     padding-bottom: 2%;
-    padding-right: 0px;
-    width: 800px;
-    left: 0px;
+    padding-right: 0%;
+    width: 80%;
+    left: 0%;
 }
 
-#name, #email, #weight, #username {
-    padding: 7px;
-    padding-right: 0px;
+#name-signup {
+    left: 10%;
+    width: 34.5%;
+}
+
+#name-signup, #email-signup, #weight-signup, #username-signup, #password-signup {
+    margin-left: 4.75%;
+    padding: 1%;
     border: 1px solid #ccc;
     box-sizing: border-box;
     float: left;
     position: relative;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
 }
-
-
-#name {
-    top: 0px;
-    left: 80px;
-    width: 288px;
-    display: inline-block;
-}
-
-#email {
-    top: 0px;
-    left: 113px;
-    width: 288px;
-    display: inline-block;
-}
-
-#weight {
-    top: 0px;
-    left: 104px;
-    margin: 10px;
-    width: 250px;
-    display: inline-block;
-}
-
-#username {
-    top: 0px;
-    left: 79px;
-    width: 288px;
-    display: inline-block;
-}
-
-#password {
-    top: 0px;
-    left: -1px; 
-    width: 288px;   
-    display: inline-block;
-    margin-bottom: 0%;  
-} 
 
 .label-one, .label-two, .label-three, .label-four, .label-five {
-    padding-top: 15px;
+    padding-top: 2%;
     float: left;
-    margin-left: 255px;
+    margin-left: 33%;
 }
 
-.form-group {
-    width: 450px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 0px;
-    border: 1px solid #ccc;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 6px;
-    margin-bottom: 5px;
+.lb-signup {
+    margin-top: 14%;
+    margin-left: 79%;
+    margin-bottom: 1%;
 }
 
-button {
-    box-shadow: none;
-    border: none;
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14pt;
-    letter-spacing: -2px;
+#password-signup {
+    left: 10.3%; 
+    width: 34.5%; 
+    margin-bottom: 0%; 
+} 
+
+#username-signup {
+    left: 9.8%;
+    width: 34.5%;
 }
 
-.lb {
-    /* position: relative; */
-    top: 60px;
-    padding-top:7%;
-    margin-bottom:-2%;
-    left: -10px;
+#weight-signup {
+    left: 13%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+    width: 29%;
 }

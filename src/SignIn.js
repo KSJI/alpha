@@ -20,12 +20,12 @@ export default class SignIn extends React.Component {
             if (user) {
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
-                this.state.subEmail = subEmail;
+                this.setState({subEmail:subEmail})
 
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.state.acceptTerms = snap;
+                    this.setState({acceptTerms:snap})
                 })
                 console.log(this.state.acceptTerms);
                 if (this.state.acceptTerms) {
@@ -54,28 +54,27 @@ export default class SignIn extends React.Component {
             <div>
                 <DisplayHeader />
                 <div className="container">
-                    <div className="form-group-one">
-                        <label className="username-input" htmlFor="email">Username</label>
+                    <div className="form-group-one-signin">
+                        <label className="username-input" htmlFor="username">Username</label>
                         <input type="text"
-                            id="username"
+                            id="username-signin"
                             className="form-control"
                             onInput={evt => this.setState({ email: evt.target.value })} />
                     </div>
-                    <div className="form-group-two">
+                    <div className="form-group-two-signin">
                         <label className="password-input" htmlFor="password">Password</label>
                         <input type="password"
-                            id="password"
+                            id="password-signin"
                             className="form-control"
                             minLength="6"
                             onInput={evt => this.setState({ password: evt.target.value })} />
                     </div>
-                    <div>
+                    <div className='forgot-password'>
                         <Link to={ROUTES.forgotPassword}>
-                            <p className='forgot-password'>Forgot Password?</p>
+                            <p className='forgot-password-message'>Forgot Password?</p>
                         </Link>
                     </div>
-
-                    <div className="form-group">
+                    <div className="form-group-signin">
                         <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
                     </div>
                     <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>

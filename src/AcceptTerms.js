@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import {ROUTES} from "./constants";
 import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
@@ -29,12 +28,12 @@ export default class AcceptTerms extends React.Component {
 
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
-                this.state.subEmail = subEmail;
+                this.setState({subEmail:subEmail})
 
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.state.acceptTerms = snap;
+                    this.setState({acceptTerms : snap})
                 })
                 if (this.state.acceptTerms) {
                     this.props.history.push(ROUTES.homePage);
@@ -49,7 +48,7 @@ export default class AcceptTerms extends React.Component {
     }
 
     handleCheck() {
-        this.state.checked = !this.state.checked;
+        this.setState({checked : !this.state.checked})
         console.log(this.state.checked);
     }
 
@@ -78,10 +77,12 @@ export default class AcceptTerms extends React.Component {
                         This is a fun website to help encourage people to 
                         live a healthier lifestyle not for bulimia, 
                         anorexia, etc. </p>
-		                <div className="tag">Checkbox Big</div>
+		                {/* <div className="tag">Checkbox Big</div> */}
 		                <input type="checkbox" onClick={() => this.handleCheck()} id="checkbox-2-1" className="regular-checkbox big-checkbox" />
                     <p className='accept'> I accept the terms and conditions of this warning </p>
-                    <button type="submit" onClick={() => this.handleContinue()} className="btn btn-primary">Continue</button>
+                    <div className='button-accept'>
+                        <button type="submit" onClick={() => this.handleContinue()} className="btn btn-primary">CONTINUE</button>
+                    </div>
                 </div>
             </div>
         );

@@ -5,10 +5,12 @@
     padding-left: 20px;
 }
 .input-color .color-box {
-    width: 90px;
-    height: 20px;
+    width: 145px;
+    height: 25px;
     display: inline-block;
-    background-color: #ccc;
+    border: 1px solid #ccc;
+    position: relative;
+    left: 25%;
 }
 
 .container {
@@ -20,4 +22,77 @@
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.color-analysis-label {
+    font-size: 14pt;
+    position: relative;
+    left: 21.5%;
+    padding-bottom: 3%;
+    margin-top: 0%;
+}
+
+.date {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    margin: 0%;
+}
+
+.name {
+    margin-bottom: 0%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    padding: 0%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.color-label, .percentage-label {
+    text-align: left;
+}
+
+.flex-space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-direction {
+    flex-direction: column;
+    padding: 2%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.flex-direction-top {
+    flex-direction: column;
+    padding: 0%;
+}
+
+.delete-button {
+    left:20%;
+    padding: 1%;
+}
+
+.meal-label {
+    position: relative;
+    left: -24%;
+    width: 100%;
+}
+
+.made-label {
+    position: relative;
+    left: -24%;
+}
+
+.calories-label {
+    position: relative;
+    left: -29%;
+}
+
+.question {
+    text-align:center;
+    padding-bottom: 2%;
 }

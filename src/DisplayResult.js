@@ -3,15 +3,11 @@ import firebase from 'firebase';
 import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/firestore';
-import DisplayResultCSS from "./DisplayResult.css"
 import { Link } from 'react-router-dom';
 import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
+import './DisplayResult.css'
 //import 'bootstrap/dist/css/bootstrap.min.css';
-
-const cardStyle = {
-    width: "75%"
-};
 
 export default class DisplayResult extends Component {
     constructor(props) {
@@ -23,8 +19,9 @@ export default class DisplayResult extends Component {
             madeFrom: "",
             totalCalories: "",
             data: [],
-            createdAt:"",
+            createdAt: "",
             fileName: "",
+            key: "",
             dataSnap: undefined
         }
     }
@@ -39,12 +36,12 @@ export default class DisplayResult extends Component {
                     if (snap !== null) {
                         this.setState({
                             imgUrl: snap.urls,
-                            imgName:snap.meal,
-                            typeOfMeal:snap.typeOfMeal,
-                            madeFrom:snap.madeFrom,
-                            totalCalories:snap.totalCalories,
+                            imgName: snap.meal,
+                            typeOfMeal: snap.typeOfMeal,
+                            madeFrom: snap.madeFrom,
+                            totalCalories: snap.totalCalories,
                             createdAt: snap.createdAt,
-                            data:snap.data,
+                            data: snap.data,
                             fileName: snap.file
                         });
                     }
@@ -53,6 +50,7 @@ export default class DisplayResult extends Component {
                 this.setState(
                     {
                         uid: user.uid,
+                        key: this.props.location.state.reference
                     })
             }
         })
@@ -66,32 +64,52 @@ export default class DisplayResult extends Component {
         let date = this.state.createdAt;
         date = date.split(" ");
         date = date[1] + " " + date[2] + ", " + date[3]
+        let colors = this.state.data.map((data, i) => {
+            return (<div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: "" + data.html_code }}></div></div>)
+        })
+        let name = this.state.imgName;
+        let imgNameCase = name.charAt(0).toUpperCase() + name.substr(1);
         return (
             <div>
-                <DisplayHeader/>
+                <DisplayHeader />
                 <div className="container">
-                    <p>{date}</p>
-                    <p>{this.state.imgName}</p>
-                    <p>{this.state.typeOfMeal}</p>
-                    <p>{this.state.madeFrom}</p>
-                    <p>{this.state.totalCalories}</p>
-                    <div>
-                        <Link
-                            to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference}}}
-                        >
-                            <button>Delete</button>
-                        </Link>
+                    <div className="flex-space" style={{textAlign:"left"}}>
+                        <div className="flex-direction-top">
+                            <p className='date'>{date}</p>
+                            <p className='name'>{imgNameCase}</p>
+                            {/* {this.state.typeOfMeal !== "" ? <p>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
+                            {this.state.madeFrom !== "" ? <p>Made From: {this.state.madeFrom}</p> : undefined}
+                            {this.state.totalCalories !== "" ? <p>Total Calories: {this.state.totalCalories}</p> : undefined} */}
+                        </div>
+                        <div style={{justifyContent: "flex-end"}}>
+                            <Link
+                                to={{ pathname: ROUTES.deleteConfirmation, state: {reference: this.reference, key: this.state.key} }}
+                            >
+                                <button className="fa fa-trash" style={{height: "50%", width: "10%", float: "right", color:"black"}}></button>
+                            </Link>
+                        </div>
                     </div>
-                    <img src={this.state.imgUrl} alt="food" />
+                    <img width="70%" src={this.state.imgUrl} alt="food" />
                 </div>
                 <div className="container">
-                    <p>colors</p>
-                    {this.state.data.map((data, i) => <div className="input-color" key={"color-" + i}><div className="color-box" style={{ backgroundColor: data.html_code }}></div></div>
-                    )}
-                    <p>percentage</p>
-                    {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent} %</p>)}
+                    <div className="flex-container">
+                    <p className="color-analysis-label">Color Analysis</p>
+                        <div className="flex-direction">
+                        <p className='color-label'>Color</p>
+                        {colors}
+                        </div>
+                        <div className="flex-direction">
+                        <p className='percentage-label'>Percentage</p>
+                        {this.state.data.map((data, i) => <p key={"percent-" + i}>{data.percent}%</p>)}
+                        </div>
+                        <div className="flex-direction">
+                            {this.state.typeOfMeal !== "" ? <p className='meal-label'>Type of Meal: {this.state.typeOfMeal}</p> : undefined}
+                            {this.state.madeFrom !== "" ? <p className='made-label'>Made From: {this.state.madeFrom}</p> : undefined}
+                            {this.state.totalCalories !== "" ? <p className='calories-label'>Total Calories: {this.state.totalCalories}</p> : undefined}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div >
         )
     }
 

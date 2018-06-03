@@ -69,15 +69,15 @@ export class DisplayCards extends Component {
                     {cards}
                 </Col>
                 <Router>
-                    <Col className="settings-col">
-                        <Link to="/Settings" style={{ color: 'black' }}><i className="fas fa-cog fa-lg"></i></Link>{" "}
-                        <button type="button" className="btn btn-primary" onClick={() => {
+                    <Col className="settings-col1">
+                        <Link to="/Settings" style={{ color: 'black', padding: "5%"}}><i className="fas fa-cog fa-lg"></i></Link>{" "}
+                        <button type="button" className="signoutbutton" onClick={() => {
                             firebase.auth().signOut()
                                 .then(this.props.history.push(ROUTES.signIn));
                         }}>SIGN OUT</button>
                     </Col>
                 </Router>
-                <Col className="settings-col">
+                <Col className="settings-col2">
                     <Link to={ROUTES.displayAddNewPost}>
                         <button>UPLOAD A NEW POST</button>
                     </Link>

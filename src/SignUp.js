@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { ROUTES } from './constants';
 import firebase from 'firebase/app';
 import 'firebase/auth'; 
@@ -88,54 +87,54 @@ export default class SignUp extends React.Component {
             <div>
                 <DisplayHeader />
                 <div className="container">
-                    <div className="form-group-one">
+                    <div className="form-group-one-signup">
                         <label className="label-one" htmlFor='Full-name'>Full Name</label>
                             <input type='text'
-                                id='name'
+                                id='name-signup'
                                 className='form-control'
                                 required
                                 // placeholder='Your Full Name'
                                 onInput={evt => this.setState({fullName: evt.target.value})}/>
                     </div>
-                    <div className="form-group-two">
+                    <div className="form-group-two-signup">
                         <label className="label-two" htmlFor="email">Email</label>
                             <input type="text"
-                                id="email"
+                                id="email-signup"
                                 className="form-control"
                                 // placeholder="your email address"
                                 required
                                 onInput={evt => this.setState({email: evt.target.value})}/>
                     </div>
-                    <div className="form-group-three">
+                    <div className="form-group-three-signup">
                         <label className="label-three" htmlFor='Weight'>Weight</label>
                             <input type='number'
-                                id="weight"
+                                id="weight-signup"
                                 className='form-control'
                                 required
                                 step='.01'
                                 // placeholder=''
                                 onInput={evt => this.setState({weight: evt.target.value})}/>
-                        <p className="lb"> lbs </p>
+                        <p className="lb-signup"> lbs </p>
                     </div>
-                    <div className="form-group-four">
+                    <div className="form-group-four-signup">
                         <label className="label-four" htmlFor='Username'>Username</label>
                             <input type='text'
-                                id='username'
+                                id='username-signup'
                                 className='form-control'
                                 required
                                 // placeholder='Your Username'
                                 onInput={evt => this.setState({userName: evt.target.value})}/>
                     </div>
-                    <div className="form-group-five">
+                    <div className="form-group-five-signup">
                         <label className="label-five" htmlFor="password">Password</label>
                             <input type="password"
-                                id="password"
+                                id="password-signup"
                                 className="form-control"
                                 // placeholder="your password"
                                 minLength="6"
                                 onInput={evt => this.setState({password: evt.target.value})}/>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-signup">
                         <button type="submit" onClick={() => this.handleSignUp()} className="btn btn-primary">CREATE AN ACCOUNT</button>
                     </div>                  
                 </div>
