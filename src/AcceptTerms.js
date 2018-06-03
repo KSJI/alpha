@@ -4,7 +4,6 @@ import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
 import './AcceptTerms.css';
-import Route from "react-router-dom/Route";
 
 
 export default class AcceptTerms extends React.Component {

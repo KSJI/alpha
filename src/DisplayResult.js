@@ -51,7 +51,6 @@ export default class DisplayResult extends Component {
                 this.reference2.on('value', (snapshot) => {
                     let snap = snapshot.val();
                     this.setState({acceptTerms : snap});
-                    console.log(snap);
                     if (this.state.acceptTerms === false) {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
