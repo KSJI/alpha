@@ -184,44 +184,6 @@ export default class DisplayAddNewPost extends React.Component {
         })
     }
 
-    /* addData(uploadTask) {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            this.setState({ urls: downloadURL })
-            var request = require('request'),
-            apiKey = 'acc_ed444d09ca5972e',
-            apiSecret = '4244876bb30509de06e9cd4ed7c94396',
-            imageUrl = downloadURL;
-
-            request.get('https://api.imagga.com/v1/colors?url=' + encodeURIComponent(imageUrl), (error, response, body) => {
-                var data = JSON.parse(response.body);
-                data = data.results[0].info.image_colors
-                //console.log(data.results[0].info.image_colors);
-                this.setState({ data: data });
-                console.log(this.state);
-                let email = this.state.email;
-                var subEmail = email.substr(0, email.indexOf('@'));
-                let time = firebase.database.ServerValue.TIMESTAMP;
-                time = Date(time);
-                console.log(this.state.urls);
-                let newData = {
-                    email: this.state.email,
-                    meal: this.state.meal,
-                    typeOfMeal: this.state.typeOfMeal,
-                    madeFrom: this.state.madeFrom,
-                    totalCalories: this.state.totalCalories,
-                    data: this.state.data,
-                    urls: this.state.urls,
-                    createdAt: time
-                }
-                this.reference = firebase.database().ref('Profile/' + subEmail + "/Posts");
-                // put together the data
-                this.reference.push(newData);
-            }).auth(apiKey, apiSecret, true)
-        })
-    } */
-
     handleImageChange(e) {
         e.preventDefault();
         let reader = new FileReader();
@@ -244,9 +206,11 @@ export default class DisplayAddNewPost extends React.Component {
         var yyyy = today.getFullYear();
 
         today = month[mm] +' '+dd + ', ' + yyyy;
-        console.log(today);
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
+        let checkMeal = this.state.meal.length > 0;
+        let checkUrl = this.state.urls.length > 0;
+        
         if (imagePreviewUrl) {
             $imagePreview = (<img className="imgPreview.img"alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
@@ -325,7 +289,7 @@ export default class DisplayAddNewPost extends React.Component {
                                 <Link to={ROUTES.homePage}><button type="button">CANCEL</button></Link>
                             </div>
                             <div className='submitButton'>
-                                <button type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
+                                <button disabled={!checkMeal && !checkUrl} type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
                             </div>
                         </div>
                 </div>
