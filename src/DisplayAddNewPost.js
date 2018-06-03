@@ -38,11 +38,21 @@ export default class DisplayAddNewPost extends React.Component {
     componentDidMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                this.setState(
-                    {
-                        uid: user.uid,
-                        email: user.email
-                    })
+                this.setState({
+                    uid: user.uid,
+                    email: user.email
+                })
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+                
+                this.reference2 = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
+                this.reference2.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({acceptTerms : snap});
+                    if (this.state.acceptTerms === false) {
+                        this.props.history.push(ROUTES.acceptTerms);
+                    }
+                })
             }
         })
     }
@@ -200,98 +210,98 @@ export default class DisplayAddNewPost extends React.Component {
     render() {
         //new date source code from w3resource
         var today = new Date();
-        var dd = today. getDate();
+        var dd = today.getDate();
         var mm = today.getMonth();
-        var month = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        var month = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var yyyy = today.getFullYear();
 
-        today = month[mm] +' '+dd + ', ' + yyyy;
+        today = month[mm] + ' ' + dd + ', ' + yyyy;
         let { imagePreviewUrl } = this.state;
         let $imagePreview = null;
         let checkMeal = this.state.meal.length > 0;
         let checkUrl = this.state.urls.length > 0;
-        
+
         if (imagePreviewUrl) {
-            $imagePreview = (<img className="imgPreview.img"alt="preview of what is being displayed" src={imagePreviewUrl} />)
+            $imagePreview = (<img className="imgPreview.img" alt="preview of what is being displayed" src={imagePreviewUrl} />)
         } else {
             $imagePreview = (<div className="previewText">Please select an Image for preview </div>)
         }
         return (
             <div>
-                <DisplayHeader/>
+                <DisplayHeader />
                 <div className="container">
-                        <div>
-                            <p className="flex-start-date">{today}</p>
-                            <div className="input-group">
-                                <div className="flex-start">
-                                    <p>Meal: </p>
-                                    <input type="text" style={divStyle}
-                                        className="meal-form-control"
-                                        value={this.state.meal}
-                                        onInput={evt => this.setState({
-                                            meal: evt.target.value
-                                        })}
-                                        // placeholder="type here"
+                    <div>
+                        <p className="flex-start-date">{today}</p>
+                        <div className="input-group">
+                            <div className="flex-start">
+                                <p>Meal: </p>
+                                <input type="text" style={divStyle}
+                                    className="meal-form-control"
+                                    value={this.state.meal}
+                                    onInput={evt => this.setState({
+                                        meal: evt.target.value
+                                    })}
+                                // placeholder="type here"
+                                />
+                            </div>
+                            <div className="PreviewComponenet">
+                                <div className="imgPreview">  {$imagePreview}
+                                </div>
+                                <div className="flex-start-file">
+                                    <p>File to upload: </p>
+                                    <input type="file" style={divStyle}
+                                        className="form-control-upload"
+                                        onChange={evt => this.handleImageChange(evt)}
                                     />
                                 </div>
-                                <div className="PreviewComponenet">
-                                    <div className="imgPreview">  {$imagePreview}
-                                    </div>
-                                    <div className="flex-start-file">
-                                        <p>File to upload: </p>
-                                        <input type="file" style={divStyle}
-                                            className="form-control-upload"
-                                            onChange={evt => this.handleImageChange(evt)}
-                                        />
-                                    </div>
+                            </div>
+                            <p className="flex-start">Food Information</p>
+                            <div style={{ paddingLeft: "4%" }}>
+                                <div className="flex-start">
+                                    <p>Type of Meal:</p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control-meal"
+                                        value={this.state.typeOfMeal}
+                                        onInput={evt => this.setState({
+                                            typeOfMeal: evt.target.value
+                                        })}
+                                    />
+                                    <p className='optional'>*optional*</p>
                                 </div>
-                                <p className="flex-start">Food Information</p>
-                                <div style={{paddingLeft: "4%"}}>
-                                    <div className="flex-start">
-                                        <p>Type of Meal:</p>
-                                        <input type="text" style={divStyle}
-                                            className="form-control-meal"
-                                            value={this.state.typeOfMeal}
-                                            onInput={evt => this.setState({
-                                                typeOfMeal: evt.target.value
-                                            })}
-                                        />
-                                        <p className='optional'>*optional*</p>
-                                    </div>
-                                    <div className="flex-start">
-                                        <p>Made From:</p>
-                                        <input type="text" style={divStyle}
-                                            className="form-control-made"
-                                            value={this.state.madeFrom}
-                                            onInput={evt => this.setState({
-                                                madeFrom: evt.target.value
-                                            })}
+                                <div className="flex-start">
+                                    <p>Made From:</p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control-made"
+                                        value={this.state.madeFrom}
+                                        onInput={evt => this.setState({
+                                            madeFrom: evt.target.value
+                                        })}
 
-                                        />
-                                        <p className='optional'>*optional*</p>
-                                    </div>
-                                    <div className="flex-start">
-                                        <p>Total Calories: </p>
-                                        <input type="text" style={divStyle}
-                                            className="form-control-calories"
-                                            value={this.state.totalCalories}
-                                            onInput={evt => this.setState({
-                                                totalCalories: evt.target.value
-                                            })}
-                                        />
-                                        <p className='optional'>*optional*</p>
-                                    </div>
+                                    />
+                                    <p className='optional'>*optional*</p>
+                                </div>
+                                <div className="flex-start">
+                                    <p>Total Calories: </p>
+                                    <input type="text" style={divStyle}
+                                        className="form-control-calories"
+                                        value={this.state.totalCalories}
+                                        onInput={evt => this.setState({
+                                            totalCalories: evt.target.value
+                                        })}
+                                    />
+                                    <p className='optional'>*optional*</p>
                                 </div>
                             </div>
                         </div>
-                        <div className='two-buttons'>
-                            <div className='cancelButton'>
-                                <Link to={ROUTES.homePage}><button type="button">CANCEL</button></Link>
-                            </div>
-                            <div className='submitButton'>
-                                <button disabled={!checkMeal && !checkUrl} type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
-                            </div>
+                    </div>
+                    <div className='two-buttons'>
+                        <div className='cancelButton'>
+                            <Link to={ROUTES.homePage}><button type="button">CANCEL</button></Link>
                         </div>
+                        <div className='submitButton'>
+                            <button disabled={!checkMeal && !checkUrl} type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
