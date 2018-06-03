@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import { DisplayHeader } from './DisplayHeader';
 import 'firebase/auth';
 import './AcceptTerms.css';
+import Route from "react-router-dom/Route";
 
 
 export default class AcceptTerms extends React.Component {
@@ -35,7 +36,6 @@ export default class AcceptTerms extends React.Component {
                     let snap = snapshot.val();
                     this.state.acceptTerms = snap;
                 })
-                console.log(this.state.acceptTerms);
                 if (this.state.acceptTerms) {
                     this.props.history.push(ROUTES.homePage);
                 }
@@ -61,6 +61,8 @@ export default class AcceptTerms extends React.Component {
                 AcceptTerms: this.state.checked
             });
             this.props.history.push(ROUTES.homePage);
+        } else {
+            this.props.history.push(ROUTES.signIn);
         }
     }
 
