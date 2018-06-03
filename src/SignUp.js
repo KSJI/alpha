@@ -47,7 +47,6 @@ export default class SignUp extends React.Component {
     }
 
     handleSignUp() {
-        authorSnap: undefined
         if (this.state.email === '' || this.state.password === '' || this.state.fullName === ''
                 || this.state.userName === '' || this.state.weight === '') {
             return;

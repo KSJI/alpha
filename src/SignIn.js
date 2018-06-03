@@ -27,12 +27,6 @@ export default class SignIn extends React.Component {
                     let snap = snapshot.val();
                     this.setState({acceptTerms:snap})
                 })
-                console.log(this.state.acceptTerms);
-                if (this.state.acceptTerms) {
-                    this.props.history.push(ROUTES.homePage);
-                } else {
-                    this.props.history.push(ROUTES.acceptTerms);
-                }
             }
         });
 
