@@ -51,16 +51,25 @@ button {
     top: 0%;
 }
 
+#password-signin {
+    left: 3.75%;
+    position: relative; 
+}
+
+#username-signin {
+    left: 5.75%;
+    position: relative; 
+}
+
 #username-signin, #password-signin {
     border: 1px solid #ccc;
-    box-sizing: border-box;
-    left: 3.75%; 
+    box-sizing: border-box; 
     padding: 1%;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
-    position: relative; 
     width: 34.5%;
 }
+
 
 .username-input, .password-input {
     float: left;

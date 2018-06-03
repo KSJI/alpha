@@ -49,7 +49,7 @@ export default class SignIn extends React.Component {
                 <DisplayHeader />
                 <div className="container">
                     <div className="form-group-one-signin">
-                        <label className="username-input" htmlFor="username">Username</label>
+                        <label className="username-input" htmlFor="username">Email</label>
                         <input type="text"
                             id="username-signin"
                             className="form-control"
