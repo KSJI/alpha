@@ -48,7 +48,7 @@ export default class SignUp extends React.Component {
 
     handleSignUp() {
         if (this.state.email === '' || this.state.password === '' || this.state.fullName === ''
-                || this.state.userName === '' || this.state.weight === '') {
+                || this.state.userName === '' || this.state.weight === '' || this.state.weight.includes("e")) {
             return;
         } else {
             firebase.auth().createUserWithEmailAndPassword(this.state.email,
