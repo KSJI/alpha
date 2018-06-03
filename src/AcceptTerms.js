@@ -10,7 +10,7 @@ export default class AcceptTerms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            acceptTerms: false,
+            acceptTerms: null,
             checked: false,
             subEmail: '',
         }
@@ -19,12 +19,6 @@ export default class AcceptTerms extends React.Component {
     componentWillMount() {
         this.authUnlisten = firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({
-                    email: user.email,
-                    weight: user.weight,
-                    username: user.username,
-                })
-
                 let email = user.email;
                 let subEmail = email.substr(0, email.indexOf('@'));
                 this.setState({subEmail:subEmail})
@@ -32,12 +26,21 @@ export default class AcceptTerms extends React.Component {
                 this.reference = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.setState({acceptTerms : snap})
+                    this.setState({acceptTerms : snap});
+                    if (this.state.acceptTerms) {
+                        this.props.history.push(ROUTES.homePage);
+                    }
+
                 })
-                console.log(this.state.acceptTerms);
-                if (this.state.acceptTerms) {
-                    this.props.history.push(ROUTES.homePage);
-                }
+
+                this.setState({
+                    email: user.email,
+                    weight: user.weight,
+                    username: user.username,
+                })
+
+
+                
                
             }
         })

@@ -3,6 +3,8 @@ import firebase from 'firebase';
 import { HashRouter as Router, Link } from 'react-router-dom';
 import { DisplayHeader } from './DisplayHeader';
 import './Settings.css';
+import { ROUTES } from "./constants";
+
 
 export default class DisplayEditAccountSettings extends Component {
     constructor(props) {
@@ -36,6 +38,16 @@ export default class DisplayEditAccountSettings extends Component {
                     this.setState({
                         weight: snap,
                     });
+                })
+
+                this.reference2 = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
+                this.reference2.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({acceptTerms : snap});
+                    console.log(snap);
+                    if (this.state.acceptTerms === false) {
+                        this.props.history.push(ROUTES.acceptTerms);
+                    }
                 })
             }
         })
