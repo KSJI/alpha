@@ -86,7 +86,6 @@ export default class DisplayEditAccountSettings extends Component {
 
                     // Create a new node in the firebase database that reflects the new email
                     let ref = firebase.database().ref('Profile/' + tempEmail);
-                    console.log(snap);
                     ref.set(snap);
                 })
 
@@ -107,9 +106,7 @@ export default class DisplayEditAccountSettings extends Component {
                     console.log(error);
                 });
 
-                user.updateEmail(this.state.newEmail).then(
-                    console.log('success')
-                )
+                user.updateEmail(this.state.newEmail);
 
                 sleep(2000);
             } else {
