@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { HashRouter as Router, Link } from 'react-router-dom';
 import { DisplayHeader } from './DisplayHeader';
 import './Settings.css';
 import { ROUTES } from "./constants";
@@ -44,7 +43,6 @@ export default class DisplayEditAccountSettings extends Component {
                 this.reference2.on('value', (snapshot) => {
                     let snap = snapshot.val();
                     this.setState({acceptTerms : snap});
-                    console.log(snap);
                     if (this.state.acceptTerms === false) {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
@@ -171,6 +169,7 @@ export default class DisplayEditAccountSettings extends Component {
             }
 
         }
+        this.props.history.push(ROUTES.homePage)
     }
 
     handleAdd() {
@@ -225,8 +224,10 @@ export default class DisplayEditAccountSettings extends Component {
                     </div>
                     <div className="weight-settings">
                         <label className="weight-label" htmlFor="weight">Weight</label>
-                        <input type="text"
+                        <input type="number"
                             id="weight-input"
+                            min="0"
+                            step="0.01"
                             placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
@@ -235,10 +236,8 @@ export default class DisplayEditAccountSettings extends Component {
                         <i id="icon-three" className="fas fa-pencil-alt"></i>
                     </div>
 
-                    <div className="save">
-                        <Router>
-                            <Link to="/Homepage"><button onClick={() => this.updateSettings()}>SAVE</button></Link>
-                        </Router>
+                    <div className="save" onClick={() => this.updateSettings()}>
+                        <button>SAVE</button>
                     </div>
                 </div>
             </div>

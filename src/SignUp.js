@@ -108,6 +108,7 @@ export default class SignUp extends React.Component {
                                 id="weight-signup"
                                 className='form-control'
                                 required
+                                min="0"
                                 step='.01'
                                 onInput={evt => this.setState({weight: evt.target.value})}/>
                         <p className="lb-signup"> lbs </p>
@@ -128,8 +129,8 @@ export default class SignUp extends React.Component {
                                 minLength="6"
                                 onInput={evt => this.setState({password: evt.target.value})}/>
                     </div>
-                    <div className="form-group-signup">
-                        <button type="submit" onClick={() => this.handleSignUp()} className="btn btn-primary">CREATE AN ACCOUNT</button>
+                    <div className="form-group-signup" onClick={() => this.handleSignUp()}>
+                        <button type="submit" className="btn btn-primary">CREATE AN ACCOUNT</button>
                     </div>                  
                 </div>
             </div>
