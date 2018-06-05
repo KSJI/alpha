@@ -236,6 +236,7 @@ export default class DisplayAddNewPost extends React.Component {
                             <div className="flex-start">
                                 <p>Meal: </p>
                                 <input type="text" style={divStyle}
+                                maxlength="70"
                                     className="meal-form-control"
                                     value={this.state.meal}
                                     onInput={evt => this.setState({
@@ -261,6 +262,7 @@ export default class DisplayAddNewPost extends React.Component {
                                     <p>Type of Meal:</p>
                                     <input type="text" style={divStyle}
                                         className="form-control-meal"
+                                        maxlength="70"
                                         value={this.state.typeOfMeal}
                                         onInput={evt => this.setState({
                                             typeOfMeal: evt.target.value
@@ -270,7 +272,7 @@ export default class DisplayAddNewPost extends React.Component {
                                 </div>
                                 <div className="flex-start">
                                     <p>Made From:</p>
-                                    <input type="text" style={divStyle}
+                                    <input type="text" maxlength="70" style={divStyle}
                                         className="form-control-made"
                                         value={this.state.madeFrom}
                                         onInput={evt => this.setState({
@@ -282,7 +284,7 @@ export default class DisplayAddNewPost extends React.Component {
                                 </div>
                                 <div className="flex-start">
                                     <p>Total Calories: </p>
-                                    <input type="text" style={divStyle}
+                                    <input type="text" maxlength="10" style={divStyle}
                                         className="form-control-calories"
                                         value={this.state.totalCalories}
                                         onInput={evt => this.setState({
