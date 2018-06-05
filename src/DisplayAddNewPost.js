@@ -7,6 +7,7 @@ import 'firebase/database';
 import 'firebase/firestore';
 import { DisplayHeader } from './DisplayHeader';
 import './DisplayAddNewPost.css'
+import Route from "react-router-dom/Route";
 
 
 
@@ -53,6 +54,8 @@ export default class DisplayAddNewPost extends React.Component {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
                 })
+            } else {
+                this.props.history.push(ROUTES.signIn);
             }
         })
     }

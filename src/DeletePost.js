@@ -9,6 +9,7 @@ import { ROUTES } from "./constants";
 import { DisplayHeader } from './DisplayHeader';
 import './DisplayResult.css'
 import './DeletePost.css'
+import Route from 'react-router-dom/Route';
 
 export default class DeletePost extends Component {
     constructor(props) {
@@ -47,6 +48,8 @@ export default class DeletePost extends Component {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
                 })
+            } else {
+                this.props.history.push(ROUTES.signIn);
             }
         })
     }

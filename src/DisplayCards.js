@@ -46,6 +46,8 @@ export class DisplayCards extends Component {
 
 
                 })
+            } else {
+                this.props.history.push(ROUTES.signIn);
             }
         })
     }

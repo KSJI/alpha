@@ -61,6 +61,8 @@ export default class DisplayResult extends Component {
                         uid: user.uid,
                         key: this.props.location.state.reference
                     })
+            } else {
+                this.state.props.history.push(ROUTES.signIn);
             }
         })
 

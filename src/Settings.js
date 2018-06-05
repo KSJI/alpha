@@ -49,6 +49,8 @@ export default class DisplayEditAccountSettings extends Component {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
                 })
+            } else {
+                this.props.history.push(ROUTES.signIn);
             }
         })
     }

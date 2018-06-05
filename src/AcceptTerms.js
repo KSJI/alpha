@@ -36,6 +36,8 @@ export default class AcceptTerms extends React.Component {
                     weight: user.weight,
                     username: user.username,
                 })   
+            } else {
+                this.props.history.push(ROUTES.signIn);
             }
         })
     }
