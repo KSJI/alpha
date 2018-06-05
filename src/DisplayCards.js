@@ -79,10 +79,8 @@ export class DisplayCards extends Component {
                         }}>SIGN OUT</button>
                     </Col>
                 </Router>
-                <Col className="settings-col2">
-                    <Link to={ROUTES.displayAddNewPost}>
+                <Col className="settings-col2" onClick={() => {this.props.history.push(ROUTES.displayAddNewPost)}}>
                         <button>UPLOAD A NEW POST</button>
-                    </Link>
                 </Col>
             </div>
         )

@@ -15,7 +15,6 @@ export default class ForgotPassword extends Component {
     }
 
     handleReset() {
-        // console.log(this.state);
         firebase.auth().sendPasswordResetEmail(this.state.email)
             .then(this.props.history.push(ROUTES.signIn))
             .catch(function (error) {
@@ -47,8 +46,8 @@ export default class ForgotPassword extends Component {
                             onInput={evt => this.setState({ username: evt.target.value })} />
                     </div>
                     <p className='notification-message'>An email will be sent to reset your password</p>
-                    <div className="button-forgot">
-                        <button onClick={() => { this.handleReset() }}>RESET PASSWORD</button>
+                    <div className="button-forgot" onClick={() => { this.handleReset() }}>
+                        <button >RESET PASSWORD</button>
                     </div>
                 </div>
             </div>

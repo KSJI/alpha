@@ -75,17 +75,12 @@ export default class DisplayAddNewPost extends React.Component {
         uploadTask.on('state_changed', function (snapshot) {
             // Observe state change events such as progress, pause, and resume
             // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
             switch (snapshot.state) {
                 case firebase.storage.TaskState.PAUSED: // or 'paused'
-                    console.log('Upload is paused');
                     break;
                 case firebase.storage.TaskState.RUNNING: // or 'running'
-                    console.log('Upload is running');
                     break;
                 default:
-                    console.log("Working");
                     break;
             }
         }, function (error) {
@@ -168,7 +163,6 @@ export default class DisplayAddNewPost extends React.Component {
                     var data = JSON.parse(response.body);
                     data = data.results[0].info.image_colors
                     this.setState({ data: data });
-                    console.log(this.state);
                     if (this.state.urls !== "") {
                         this.props.history.push(ROUTES.homePage)
                     }
@@ -177,7 +171,6 @@ export default class DisplayAddNewPost extends React.Component {
                     let time = firebase.database.ServerValue.TIMESTAMP;
                     time = Date(time);
                     let fileName = this.state.file;
-                    console.log(this.state.urls);
                     let newData = {
                         email: this.state.email,
                         meal: this.state.meal,
@@ -253,6 +246,7 @@ export default class DisplayAddNewPost extends React.Component {
                                 <div className="flex-start-file">
                                     <p>File to upload: </p>
                                     <input type="file" style={divStyle}
+                                        accept="image/*"
                                         className="form-control-upload"
                                         onChange={evt => this.handleImageChange(evt)}
                                     />
@@ -285,7 +279,9 @@ export default class DisplayAddNewPost extends React.Component {
                                 </div>
                                 <div className="flex-start">
                                     <p>Total Calories: </p>
-                                    <input type="text" style={divStyle}
+                                    <input type="number" style={divStyle}
+                                        min="0"
+                                        step="0.01"
                                         className="form-control-calories"
                                         value={this.state.totalCalories}
                                         onInput={evt => this.setState({
@@ -298,11 +294,11 @@ export default class DisplayAddNewPost extends React.Component {
                         </div>
                     </div>
                     <div className='two-buttons'>
-                        <div className='cancelButton'>
+                        <div className='cancelButton' onClick={() => {this.props.history.push(ROUTES.homePage)}}>
                             <Link to={ROUTES.homePage}><button type="button">CANCEL</button></Link>
                         </div>
-                        <div className='submitButton'>
-                            <button disabled={!checkMeal && !checkUrl} type="button" onClick={evt => this.handleSubmit(evt)}>SUBMIT</button>
+                        <div className='submitButton' onClick={evt => this.handleSubmit(evt)}>
+                            <button disabled={!checkMeal && !checkUrl} type="button">SUBMIT</button>
                         </div>
                     </div>
                 </div>

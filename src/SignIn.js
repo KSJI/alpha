@@ -68,11 +68,11 @@ export default class SignIn extends React.Component {
                             <p className='forgot-password-message'>Forgot Password?</p>
                         </Link>
                     </div>
-                    <div className="form-group-signin">
-                        <button type="submit" onClick={() => this.handleSignIn()} className="btn btn-primary">LOG-IN</button>
+                    <div className="form-group-signin" onClick={() => this.handleSignIn()}>
+                        <button type="submit" className="btn btn-primary">LOG-IN</button>
                     </div>
                     <p className="new-message">New to KSJI? <Link to={ROUTES.signUp}> Sign Up! </Link> </p>
-                </div>
+                </div>  
             </div>
         );
     }

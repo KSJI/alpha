@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { HashRouter as Router, Link } from 'react-router-dom';
 import { DisplayHeader } from './DisplayHeader';
 import './Settings.css';
 import { ROUTES } from "./constants";
@@ -43,8 +42,7 @@ export default class DisplayEditAccountSettings extends Component {
                 this.reference2 = firebase.database().ref('Profile/' + subEmail + '/Author/AcceptTerms');
                 this.reference2.on('value', (snapshot) => {
                     let snap = snapshot.val();
-                    this.setState({acceptTerms : snap});
-                    console.log(snap);
+                    this.setState({ acceptTerms: snap });
                     if (this.state.acceptTerms === false) {
                         this.props.history.push(ROUTES.acceptTerms);
                     }
@@ -62,57 +60,63 @@ export default class DisplayEditAccountSettings extends Component {
 
     updateSettings() {
         if (this.state.newEmail !== '') {
-            function sleep(milliseconds) {
-                var start = new Date().getTime();
-                for (var i = 0; i < 1e7; i++) {
-                    if ((new Date().getTime() - start) > milliseconds) {
-                        break;
+            if (this.state.newEmail.includes('@')) {
+                console.log('error')
+                function sleep(milliseconds) {
+                    var start = new Date().getTime();
+                    for (var i = 0; i < 1e7; i++) {
+                        if ((new Date().getTime() - start) > milliseconds) {
+                            break;
+                        }
                     }
                 }
-            }
-            let user = firebase.auth().currentUser;
+                let user = firebase.auth().currentUser;
 
-            // Grab the old data
-            let email = user.email;
-            let subEmail = email.substr(0, email.indexOf('@'));
-            this.reference = firebase.database().ref('Profile/' + subEmail);
-            this.reference.on('value', (snapshot) => {
-                let snap = snapshot.val();
-                this.setState({
-                    oldData: snap,
+                // Grab the old data
+                let email = user.email;
+                let subEmail = email.substr(0, email.indexOf('@'));
+                this.reference = firebase.database().ref('Profile/' + subEmail);
+                this.reference.on('value', (snapshot) => {
+                    let snap = snapshot.val();
+                    this.setState({
+                        oldData: snap,
+                    })
+                    // Set up the new email
+                    email = this.state.newEmail;
+                    let tempEmail = email.substr(0, email.indexOf('@'));
+
+                    // Create a new node in the firebase database that reflects the new email
+                    let ref = firebase.database().ref('Profile/' + tempEmail);
+                    console.log(snap);
+                    ref.set(snap);
                 })
-                // Set up the new email
-                email = this.state.newEmail;
-                let tempEmail = email.substr(0, email.indexOf('@'));
-
-                // Create a new node in the firebase database that reflects the new email
-                let ref = firebase.database().ref('Profile/' + tempEmail);
-                console.log(snap);
-                ref.set(snap);
-            })
 
 
 
-            // Have the user reenter their password
-            let text = prompt(
-                'What is your current password?',
-            );
+                // Have the user reenter their password
+                let text = prompt(
+                    'What is your current password?',
+                );
 
-            // what to pass into reauth
-            let credential = firebase.auth.EmailAuthProvider.credential(
-                this.state.email,
-                text
-            );
+                // what to pass into reauth
+                let credential = firebase.auth.EmailAuthProvider.credential(
+                    this.state.email,
+                    text
+                );
 
-            user.reauthenticateAndRetrieveDataWithCredential(credential).catch(function (error) {
-                console.log(error);
-            });
+                user.reauthenticateAndRetrieveDataWithCredential(credential).catch(function (error) {
+                    console.log(error);
+                });
 
-            user.updateEmail(this.state.newEmail).then(
-                console.log('success')
-            )
+                user.updateEmail(this.state.newEmail).then(
+                    console.log('success')
+                )
 
-            sleep(2000);
+                sleep(2000);
+            } else {
+                alert('Not a valid email.')
+                this.state.newEmail = '';
+            }
         }
 
         if (this.state.newPassword !== '') {
@@ -173,24 +177,25 @@ export default class DisplayEditAccountSettings extends Component {
             }
 
         }
+        this.props.history.push(ROUTES.homePage)
     }
 
-    handleAdd() {
-        let email = this.state.newEmail;
-        var subEmail = email.substr(0, email.indexOf('@'));
-        let ref = this.state.authorSnap.ref;
-        let time = firebase.database.ServerValue.TIMESTAMP;
-        time = Date(time);
-        let newData = {
-            Author: {
-                Username: this.state.userName,
-                Email: this.state.email,
-                Weight: this.state.weight
-            },
-            createdAt: time,
-        }
-        ref.child(subEmail).set(newData);
-    }
+    // handleAdd() {
+    //     let email = this.state.newEmail;
+    //     var subEmail = email.substr(0, email.indexOf('@'));
+    //     let ref = this.state.authorSnap.ref;
+    //     let time = firebase.database.ServerValue.TIMESTAMP;
+    //     time = Date(time);
+    //     let newData = {
+    //         Author: {
+    //             Username: this.state.userName,
+    //             Email: this.state.email,
+    //             Weight: this.state.weight
+    //         },
+    //         createdAt: time,
+    //     }
+    //     ref.child(subEmail).set(newData);
+    // }
 
     handleChange(event) {
         let value = event.target.value;
@@ -227,20 +232,20 @@ export default class DisplayEditAccountSettings extends Component {
                     </div>
                     <div className="weight-settings">
                         <label className="weight-label" htmlFor="weight">Weight</label>
-                        <input type="text"
+                        <input type="number"
                             id="weight-input"
+                            min="0"
+                            step="0.01"
                             placeholder={this.state.weight}
                             name="newWeight"
                             onChange={(event) => { this.handleChange(event) }}>
-                        </input> 
+                        </input>
                         <p className="lb-settings"> lbs </p>
                         <i id="icon-three" className="fas fa-pencil-alt"></i>
                     </div>
 
-                    <div className="save">
-                        <Router>
-                            <Link to="/Homepage"><button onClick={() => this.updateSettings()}>SAVE</button></Link>
-                        </Router>
+                    <div className="save" onClick={() => this.updateSettings()}>
+                        <button>SAVE</button>
                     </div>
                 </div>
             </div>
