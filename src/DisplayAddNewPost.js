@@ -7,7 +7,6 @@ import 'firebase/database';
 import 'firebase/firestore';
 import { DisplayHeader } from './DisplayHeader';
 import './DisplayAddNewPost.css'
-import Route from "react-router-dom/Route";
 
 
 

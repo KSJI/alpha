@@ -61,7 +61,6 @@ export default class DisplayEditAccountSettings extends Component {
     updateSettings() {
         if (this.state.newEmail !== '') {
             if (this.state.newEmail.includes('@')) {
-                console.log('error')
                 function sleep(milliseconds) {
                     var start = new Date().getTime();
                     for (var i = 0; i < 1e7; i++) {
@@ -115,7 +114,9 @@ export default class DisplayEditAccountSettings extends Component {
                 sleep(2000);
             } else {
                 alert('Not a valid email.')
-                this.state.newEmail = '';
+                this.setState({
+                    newEmail:''
+                })
             }
         }
 
